@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>35 Questions</title>
+  <style>
+    :root{--bg:#f6f8fb;--card:#fff;--accent:#2b6cb0;--correct:#28a745;--wrong:#dc3545}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;margin:0;background:var(--bg);color:#111}
+    header{background:linear-gradient(90deg,#1f6fb8,#2b6cb0);color:white;padding:18px 24px}
+    .container{max-width:980px;margin:18px auto;padding:18px}
+    .card{background:var(--card);border-radius:10px;box-shadow:0 6px 20px rgba(20,20,40,0.06);padding:18px}
+    h1{margin:0 0 6px;font-size:20px}
+    p.lead{margin:6px 0 16px;color:#334155}
+    .question{padding:12px;border-radius:8px;margin-bottom:10px;border:1px solid #eef2f7}
+    .qnum{font-weight:600;margin-bottom:6px}
+    .options{display:flex;gap:12px;flex-wrap:wrap}
+    label.opt{flex:1;min-width:150px;background:#f8fafc;padding:10px;border-radius:8px;border:1px solid #e6eef8;cursor:pointer}
+    input[type=radio]{margin-right:8px}
+    .controls{display:flex;gap:10px;align-items:center;margin-top:14px}
+    button{background:var(--accent);color:white;border:none;padding:10px 14px;border-radius:8px;cursor:pointer}
+    button.secondary{background:#6b7280}
+    .result{margin-top:14px;padding:12px;border-radius:8px}
+    .correct{background:rgba(40,167,69,0.08);border:1px solid rgba(40,167,69,0.18);color:var(--correct)}
+    .wrong{background:rgba(220,53,69,0.06);border:1px solid rgba(220,53,69,0.12);color:var(--wrong)}
+    .small{font-size:13px;color:#475569}
+    footer{max-width:980px;margin:20px auto;text-align:center;color:#64748b}
+    @media (max-width:700px){.options{flex-direction:column}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Vocabulary & Grammar - 50-question Test</h1>
+      <div class="small">Điền chọn A, B, C hoặc D cho mỗi câu. Nhấn "Nộp bài" để chấm điểm và xem đáp án.</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <form id="quizForm">
+        <div id="questions"></div>
+
+        <div class="controls">
+          <button type="button" id="submitBtn">Nộp bài</button>
+          <button type="button" id="resetBtn" class="secondary">Làm lại</button>
+          <div id="score" style="margin-left:auto"></div>
+        </div>
+      </form>
+
+      <div id="feedback" style="margin-top:12px"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="small">BÀI 6: CÁCH MẠNG THÁNG TÁM NĂM 1945</div>
+  </footer>
+
+  <script>
+   const questionsData = [
+  {
+    id: 1,
+    q: "Một trong những nội dung của tình hình thế giới khi cuộc kháng chiến chống Pháp (1945 - 1954) của nhân dân Việt Nam nổ ra là",
+    opts: {
+      A: "hệ thống xã hội chủ nghĩa đang hình thành",
+      B: "cách mạng Cuba đã giành được thắng lợi",
+      C: "xu thế hòa hoãn Đông - Tây đã xuất hiện",
+      D: "chiến lược toàn cầu của Mỹ đang thất bại"
+    },
+    answer: "A"
+  },
+  {
+    id: 2,
+    q: "Một trong những nội dung của tình hình Việt Nam khi cuộc kháng chiến chống Pháp (1945 - 1954) nổ ra là",
+    opts: {
+      A: "nhân dân đã giành quyền làm chủ đất nước",
+      B: "nạn đói chưa được đẩy lùi gây khó khăn lớn",
+      C: "phải đối phó với cả Tưởng, Anh, Mỹ, Pháp",
+      D: "Mỹ thiết lập quan hệ ngoại giao với Việt Nam"
+    },
+    answer: "C"
+  },
+  {
+    id: 3,
+    q: "Một trong những khó khăn thử thách mà cách mạng Việt Nam phải đương đầu sau thắng lợi của Cách mạng tháng Tám (1945) là",
+    opts: {
+      A: "các nước đế quốc bao vây, cấm vận kinh tế",
+      B: "những hậu quả nặng nề của chiến tranh để lại",
+      C: "quân đội các nước Đồng minh lũ lượt kéo vào",
+      D: "quân Tưởng hỗ trợ cho Pháp đánh Nam Bộ"
+    },
+    answer: "C"
+  },
+  {
+    id: 4,
+    q: "Để mở đầu cho cuộc chiến tranh xâm lược Việt Nam lần thứ hai, Pháp đã tấn công",
+    opts: {
+      A: "trụ sở Ủy ban hành chính Nam Bộ",
+      B: "cơ quan Trung ương cục miền Nam",
+      C: "căn cứ Củ Chi và địa đạo Vĩnh Mốc",
+      D: "cửa biển Thuận An và kinh đô Huế"
+    },
+    answer: "A"
+  },
+  {
+    id: 5,
+    q: "Khi Pháp xâm lược Nam Bộ, Đảng và Chính phủ Việt Nam đã có hành động nào sau đây?",
+    opts: {
+      A: "tiến hành đàm phán khẩn cấp với Pháp",
+      B: "tố cáo hành vi của Pháp đến Liên hợp quốc",
+      C: "đưa toàn bộ quân đội vào Nam chiến đấu",
+      D: "huy động cả nước để chi viện cho Nam Bộ"
+    },
+    answer: "D"
+  },
+  {
+    id: 6,
+    q: "Một trong những nội dung của đường lối kháng chiến chống Pháp (1945 - 1954) là",
+    opts: {
+      A: "đoàn kết kháng chiến",
+      B: "vườn không nhà trống",
+      C: "toàn dân kháng chiến",
+      D: "đánh nhanh thắng nhanh"
+    },
+    answer: "C"
+  },
+  {
+    id: 7,
+    q: "Đâu là một trong những thắng lợi mà nhân dân Việt Nam đã giành được trong cuộc kháng chiến chống Pháp (1945 - 1954)?",
+    opts: {
+      A: "Chiến thắng An Lão",
+      B: "Chiến thắng Việt Bắc",
+      C: "Chiến thắng Cửa Việt",
+      D: "Chiến thắng Vạn Tường"
+    },
+    answer: "B"
+  },
+  {
+    id: 8,
+    q: "Hoàn cảnh ra đời của kế hoạch quân sự Nava (1953) là",
+    opts: {
+      A: "Việt Nam đang gặp nhiều khó khăn",
+      B: "cuộc chiến tranh Triều Tiên bùng nổ",
+      C: "quân Pháp thiệt hại hết sức nặng nề",
+      D: "Mỹ ép Pháp kết thúc nhanh chiến tranh"
+    },
+    answer: "C"
+  },
+  {
+    id: 9,
+    q: "Trong giai đoạn một của kế hoạch Nava, Pháp tiến hành phòng ngự ở",
+    opts: {
+      A: "Bắc Bộ",
+      B: "Nam Bộ",
+      C: "Đà Nẵng",
+      D: "Trung Bộ"
+    },
+    answer: "A"
+  },
+  {
+    id: 10,
+    q: "Một trong những nội dung của phương hướng tiến công chiến lược Đông Xuân 1953 - 1954 buộc Pháp phải",
+    opts: {
+      A: "tập trung lực lượng",
+      B: "phân tán lực lượng",
+      C: "chiếm đất giành dân",
+      D: "đánh nhanh rút gọn"
+    },
+    answer: "B"
+  },
+  {
+    id: 11,
+    q: "Tháng 11-1953, khi phát hiện bộ đội Việt Nam tiến lên Tây Bắc, Nava đã điều quân chiếm giữ",
+    opts: {
+      A: "Bắc Tây Nguyên",
+      B: "Đông Nam Bộ",
+      C: "Điện Biên Phủ",
+      D: "Tây Trường Sơn"
+    },
+    answer: "C"
+  },
+  {
+    id: 12,
+    q: "Một trong những mục tiêu của Việt Nam khi mở chiến dịch Điện Biên Phủ (1954) là",
+    opts: {
+      A: "tiêu diệt sinh lực địch",
+      B: "kết thúc chiến tranh",
+      C: "mở rộng căn cứ địa",
+      D: "liên lạc với bên ngoài"
+    },
+    answer: "A"
+  },
+  {
+    id: 13,
+    q: "Sau Đại hội đại biểu lần thứ II (2-1951), Đảng Cộng sản Đông Dương có tên gọi là",
+    opts: {
+      A: "Đảng Lao động Việt Nam",
+      B: "Việt Nam quốc dân đảng",
+      C: "An Nam Cộng sản đảng",
+      D: "Đông Dương Cộng sản đảng"
+    },
+    answer: "A"
+  },
+  {
+    id: 14,
+    q: "Chiến dịch tấn công tập đoàn cứ điểm Điện Biên Phủ diễn ra trong bao nhiêu đợt?",
+    opts: {
+      A: "2",
+      B: "3",
+      C: "4",
+      D: "5"
+    },
+    answer: "B"
+  },
+  {
+    id: 15,
+    q: "Một trong những nguyên nhân chủ quan dẫn đến thắng lợi của cuộc kháng chiến chống Pháp (1945 - 1954) là",
+    opts: {
+      A: "sự lãnh đạo đúng đắn của Đảng",
+      B: "viện trợ to lớn của Trung Quốc",
+      C: "ba nước Đông Dương đoàn kết",
+      D: "phong trào phản đối chiến tranh"
+    },
+    answer: "A"
+  },
+  {
+    id: 16,
+    q: "Một trong những nguyên nhân bùng nổ của cuộc kháng chiến toàn quốc chống Pháp (12-1946) là do",
+    opts: {
+      A: "Pháp bội ước, buộc Việt Nam đầu hàng",
+      B: "nhân dân Việt Nam quyết tâm chiến đấu",
+      C: "Việt Nam có được giúp đỡ của Liên Xô",
+      D: "Pháp không chấp nhận ký hiệp định mới"
+    },
+    answer: "A"
+  },
+  {
+    id: 17,
+    q: "Một trong những cơ sở để Đảng Cộng sản Đông Dương đề ra đường lối kháng chiến toàn dân là do",
+    opts: {
+      A: "Pháp đã suy yếu, tổn thất",
+      B: "truyền thống của dân tộc",
+      C: "Mỹ đã hỗ trợ cho Pháp",
+      D: "tình hình thế giới yêu cầu"
+    },
+    answer: "B"
+  },
+  {
+    id: 18,
+    q: "Thắng lợi nào đã đánh bại chiến thuật đánh nhanh thắng nhanh của Pháp?",
+    opts: {
+      A: "Tầm Vu (1948)",
+      B: "Biên Giới (1950)",
+      C: "Việt Bắc (1947)",
+      D: "Hòa Bình (1951)"
+    },
+    answer: "C"
+  },
+  {
+    id: 19,
+    q: "Quân dân Việt Nam giành quyền chủ động trên chiến trường chính Bắc Bộ sau thắng lợi của chiến dịch",
+    opts: {
+      A: "Tầm Vu (1948)",
+      B: "Biên Giới (1950)",
+      C: "Việt Bắc (1947)",
+      D: "Hòa Bình (1951)"
+    },
+    answer: "B"
+  },
+  {
+    id: 20,
+    q: "Pháp đề ra kế hoạch Nava (1953) với mục đích chính là",
+    opts: {
+      A: "kết thúc chiến tranh trong danh dự",
+      B: "đưa được tù binh Pháp về nước",
+      C: "tiêu diệt hoàn toàn bộ đội Việt Nam",
+      D: "thành lập Liên bang Đông Dương"
+    },
+    answer: "A"
+  },
+  {
+    id: 21,
+    q: "Một trong những mục đích của Pháp khi tấn công lên Việt Bắc (1947) là",
+    opts: {
+      A: "kết thúc chiến tranh trong danh dự",
+      B: "đưa được tù binh Pháp về nước",
+      C: "tiêu diệt cơ quan đầu não kháng chiến",
+      D: "thành lập Liên bang Đông Dương"
+    },
+    answer: "C"
+  },
+  {
+    id: 22,
+    q: "Tập đoàn cứ điểm Điện Biên Phủ có hạn chế nào sau đây?",
+    opts: {
+      A: "chỉ có thể tiếp tế bằng đường không",
+      B: "quá đông quân trên địa bàn nhỏ",
+      C: "các cứ điểm không vững chắc",
+      D: "hỏa lực chi viện yếu"
+    },
+    answer: "A"
+  },
+  {
+    id: 23,
+    q: "Vì sao Điện Biên Phủ được coi là “bất khả xâm phạm”?",
+    opts: {
+      A: "căn cứ quân sự lớn nhất châu Á",
+      B: "có lực lượng đặc nhiệm Mỹ",
+      C: "quân đông, vũ khí hiện đại, cứ điểm kiên cố",
+      D: "Mỹ sẵn sàng dùng bom nguyên tử"
+    },
+    answer: "C"
+  },
+  {
+    id: 24,
+    q: "Hai nhiệm vụ chiến lược của cách mạng Việt Nam giai đoạn 1945 - 1954 là",
+    opts: {
+      A: "kháng chiến và kiến quốc",
+      B: "kháng chiến và lao động",
+      C: "chiến đấu và sản xuất",
+      D: "kháng chiến và cải cách"
+    },
+    answer: "A"
+  },
+  {
+    id: 25,
+    q: "Âm mưu chính của Pháp - Mỹ khi xây dựng tập đoàn cứ điểm Điện Biên Phủ là",
+    opts: {
+      A: "thu hút và tiêu diệt chủ lực Việt Nam",
+      B: "bảo vệ Tây Bắc",
+      C: "giành lại thế chủ động",
+      D: "ngăn chặn liên lạc Việt - Lào"
+    },
+    answer: "A"
+  },
+  {
+    id: 26,
+    q: "Điểm chung của các kế hoạch Rơ-ve, Đờ Lát và Nava là nhằm",
+    opts: {
+      A: "khóa chặt biên giới Việt - Trung",
+      B: "kết thúc chiến tranh",
+      C: "thành lập chính phủ bù nhìn",
+      D: "giành thế chủ động"
+    },
+    answer: "D"
+  },
+  {
+    id: 27,
+    q: "Điểm tương đồng về mục tiêu các chiến dịch kháng chiến chống Pháp là",
+    opts: {
+      A: "củng cố căn cứ địa",
+      B: "tiêu diệt sinh lực địch",
+      C: "giải phóng Tây Bắc",
+      D: "đánh bại bình định"
+    },
+    answer: "B"
+  },
+  {
+    id: 28,
+    q: "Điểm mới của Đại hội II (2-1951) là",
+    opts: {
+      A: "thông qua báo cáo chính trị",
+      B: "xác định nhiệm vụ từng miền",
+      C: "đưa Đảng ra hoạt động công khai",
+      D: "tổng kết kinh nghiệm đấu tranh"
+    },
+    answer: "C"
+  },
+  {
+    id: 29,
+    q: "Bài học kinh nghiệm tiếp tục vận dụng trong kháng chiến chống Mỹ là",
+    opts: {
+      A: "kết hợp sức mạnh dân tộc với sức mạnh thời đại",
+      B: "dĩ bất biến ứng vạn biến",
+      C: "nhiều nhiệm vụ chiến lược",
+      D: "liên minh quân sự Liên Xô"
+    },
+    answer: "A"
+  },
+  {
+    id: 30,
+    q: "Bài học kinh nghiệm còn nguyên giá trị đến ngày nay là",
+    opts: {
+      A: "phát huy tinh thần yêu nước của nhân dân",
+      B: "xây dựng nhiều tập đoàn quân",
+      C: "bốn nhiệm vụ chiến lược",
+      D: "liên minh quân sự"
+    },
+    answer: "A"
+  }
+];
+
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+shuffleArray(questionsData);
+
+const container = document.getElementById('questions');
+
+questionsData.forEach((item, index) => {
+  const qNumber = index + 1;
+
+  const div = document.createElement('div');
+  div.className = 'question';
+  div.id = 'q' + qNumber;
+
+  div.innerHTML = `
+    <div class="qnum">Câu ${qNumber}:</div>
+    <div class="qtext">${item.q}</div>
+    <div class="options">
+      ${Object.entries(item.opts).map(([key, val]) => `
+        <label class="opt">
+          <input type="radio" name="q${qNumber}" value="${key}">
+          <strong>${key}.</strong> ${val}
+        </label>
+      `).join('')}
+    </div>
+  `;
+
+  container.appendChild(div);
+});
+
+
+  // grading logic
+  const submitBtn = document.getElementById('submitBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const scoreDiv = document.getElementById('score');
+  const feedbackDiv = document.getElementById('feedback');
+
+  submitBtn.addEventListener('click', ()=>{
+  let correctCount = 0;
+  let total = questionsData.length;
+
+  for(let i=0;i<total;i++){
+    const qNumber = i + 1;
+    const selected = document.querySelector(`input[name="q${qNumber}"]:checked`);
+    const qDiv = document.getElementById('q'+qNumber);
+
+    qDiv.classList.remove('correct','wrong');
+    const old = qDiv.querySelector('.note'); if(old) old.remove();
+
+    const note = document.createElement('div');
+    note.className = 'note small';
+
+    if(!selected){
+      note.textContent = '(Chưa trả lời)';
+      qDiv.appendChild(note);
+      continue;
+    }
+
+    if(selected.value === questionsData[i].answer){
+      correctCount++;
+      qDiv.classList.add('correct');
+      note.textContent = `Đúng — đáp án: ${questionsData[i].answer}`;
+    } else {
+      qDiv.classList.add('wrong');
+      note.textContent = `Sai — đáp án đúng: ${questionsData[i].answer}`;
+    }
+
+    qDiv.appendChild(note);
+  }
+
+  scoreDiv.innerHTML = `<strong>Kết quả: ${correctCount}/${total}</strong>`;
+  submitBtn.disabled = true;
+});
+
+  resetBtn.addEventListener('click', ()=>{
+    document.getElementById('quizForm').reset();
+    // clear highlights/notes
+    for(let i=1;i<=questionsData.length;i++){
+      const qDiv = document.getElementById('q'+i);
+      qDiv.classList.remove('correct','wrong');
+      const note = qDiv.querySelector('.note'); if(note) note.remove();
+      const un = qDiv.querySelector('.small'); if(un) un.remove();
+    }
+    scoreDiv.innerHTML='';
+    feedbackDiv.innerHTML='';
+    submitBtn.disabled = false;
+  });
+  </script>
+</body>
+</html>

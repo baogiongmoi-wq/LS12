@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>35 Questions</title>
+  <style>
+    :root{--bg:#f6f8fb;--card:#fff;--accent:#2b6cb0;--correct:#28a745;--wrong:#dc3545}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;margin:0;background:var(--bg);color:#111}
+    header{background:linear-gradient(90deg,#1f6fb8,#2b6cb0);color:white;padding:18px 24px}
+    .container{max-width:980px;margin:18px auto;padding:18px}
+    .card{background:var(--card);border-radius:10px;box-shadow:0 6px 20px rgba(20,20,40,0.06);padding:18px}
+    h1{margin:0 0 6px;font-size:20px}
+    p.lead{margin:6px 0 16px;color:#334155}
+    .question{padding:12px;border-radius:8px;margin-bottom:10px;border:1px solid #eef2f7}
+    .qnum{font-weight:600;margin-bottom:6px}
+    .options{display:flex;gap:12px;flex-wrap:wrap}
+    label.opt{flex:1;min-width:150px;background:#f8fafc;padding:10px;border-radius:8px;border:1px solid #e6eef8;cursor:pointer}
+    input[type=radio]{margin-right:8px}
+    .controls{display:flex;gap:10px;align-items:center;margin-top:14px}
+    button{background:var(--accent);color:white;border:none;padding:10px 14px;border-radius:8px;cursor:pointer}
+    button.secondary{background:#6b7280}
+    .result{margin-top:14px;padding:12px;border-radius:8px}
+    .correct{background:rgba(40,167,69,0.08);border:1px solid rgba(40,167,69,0.18);color:var(--correct)}
+    .wrong{background:rgba(220,53,69,0.06);border:1px solid rgba(220,53,69,0.12);color:var(--wrong)}
+    .small{font-size:13px;color:#475569}
+    footer{max-width:980px;margin:20px auto;text-align:center;color:#64748b}
+    @media (max-width:700px){.options{flex-direction:column}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Vocabulary & Grammar - 50-question Test</h1>
+      <div class="small">Điền chọn A, B, C hoặc D cho mỗi câu. Nhấn "Nộp bài" để chấm điểm và xem đáp án.</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <form id="quizForm">
+        <div id="questions"></div>
+
+        <div class="controls">
+          <button type="button" id="submitBtn">Nộp bài</button>
+          <button type="button" id="resetBtn" class="secondary">Làm lại</button>
+          <div id="score" style="margin-left:auto"></div>
+        </div>
+      </form>
+
+      <div id="feedback" style="margin-top:12px"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="small">BÀI 6: CÁCH MẠNG THÁNG TÁM NĂM 1945</div>
+  </footer>
+
+  <script>
+   const questionsData = [
+  {
+    id: 1,
+    q: "Một trong những địa phương giành được chính quyền sớm nhất trong Tổng khởi nghĩa tháng Tám năm 1945 là",
+    opts: {
+      A: "Thanh Hóa",
+      B: "Quảng Nam",
+      C: "Hưng Yên",
+      D: "Cao Bằng"
+    },
+    answer: "C"
+  },
+  {
+    id: 2,
+    q: "Một trong những địa phương giành chính quyền sau cùng trong Tổng khởi nghĩa tháng Tám năm 1945 là",
+    opts: {
+      A: "Cần Thơ",
+      B: "Hà Tiên",
+      C: "Móng Cái",
+      D: "Lai Châu"
+    },
+    answer: "B"
+  },
+  {
+    id: 3,
+    q: "Ngày 13/8/1945, Trung ương Đảng và Tổng bộ Việt Minh đã thông qua quyết định nào dưới đây?",
+    opts: {
+      A: "Quyết định khởi nghĩa ở Hà Nội",
+      B: "Phát động cao trào kháng Nhật",
+      C: "Phát lệnh Tổng khởi nghĩa cả nước",
+      D: "Thống nhất lực lượng vũ trang Việt Nam"
+    },
+    answer: "C"
+  },
+  {
+    id: 4,
+    q: "Hội nghị toàn quốc của Đảng Cộng sản Đông Dương họp ở Tân Trào (14–15/8/1945) đã thông qua kế hoạch nào sau đây?",
+    opts: {
+      A: "Thống nhất các lực lượng vũ trang",
+      B: "Quyết định khởi nghĩa ở Hà Nội",
+      C: "Lãnh đạo toàn dân Tổng khởi nghĩa",
+      D: "Giải phóng dân tộc trong năm 1945"
+    },
+    answer: "C"
+  },
+  {
+    id: 5,
+    q: "Nội dung nào sau đây là điều kiện khách quan thuận lợi cho Cách mạng tháng Tám nổ ra?",
+    opts: {
+      A: "Chiến tranh thế giới thứ hai bùng nổ",
+      B: "Phát xít Đức đầu hàng quân Đồng minh",
+      C: "Mỹ ném bom nguyên tử xuống Nhật Bản",
+      D: "Nhật đầu hàng Đồng minh không điều kiện"
+    },
+    answer: "D"
+  },
+  {
+    id: 6,
+    q: "Thời cơ khách quan thuận lợi của Cách mạng tháng Tám là sự kiện nào sau đây?",
+    opts: {
+      A: "Nhật đảo chính Pháp (9/3/1945)",
+      B: "Mỹ ném bom nguyên tử xuống Nhật",
+      C: "Đức đầu hàng quân Đồng minh",
+      D: "Nhật đầu hàng Đồng minh không điều kiện"
+    },
+    answer: "D"
+  },
+  {
+    id: 7,
+    q: "Sự kiện nào sau đây đánh dấu nước Việt Nam Dân chủ Cộng hòa được thành lập?",
+    opts: {
+      A: "Hồ Chí Minh đọc Tuyên ngôn Độc lập",
+      B: "Đại hội quốc dân họp ở Tân Trào",
+      C: "Hội nghị toàn quốc của Đảng",
+      D: "Tổng tuyển cử bầu Quốc hội"
+    },
+    answer: "A"
+  },
+  {
+    id: 8,
+    q: "Theo quy định của Hội nghị Pốt-đam, việc giải giáp quân Nhật ở Đông Dương được giao cho",
+    opts: {
+      A: "Anh",
+      B: "Pháp",
+      C: "Đức",
+      D: "Mỹ"
+    },
+    answer: "A"
+  },
+  {
+    id: 9,
+    q: "Ngày 9/8/1945, quân đội Liên Xô tham chiến chống Nhật ở châu Á khi đã tấn công",
+    opts: {
+      A: "Quân Đức ở Béc-lin",
+      B: "Đạo quân Quan Đông",
+      C: "Nhật ở Đông Dương",
+      D: "Tàn dư phát xít Đức"
+    },
+    answer: "B"
+  },
+  {
+    id: 10,
+    q: "Trước khi Cách mạng tháng Tám nổ ra, lực lượng thân Nhật nào sau đây tồn tại ở Việt Nam?",
+    opts: {
+      A: "Việt Quốc và Việt Cách",
+      B: "Chính phủ kháng chiến Fulro",
+      C: "Chính phủ Trần Trọng Kim",
+      D: "Nhà nước Tin Lành Đề-ga"
+    },
+    answer: "C"
+  },
+  {
+    id: 11,
+    q: "Tổ chức cách mạng nào đã lãnh đạo nhân dân ta tiến hành Cách mạng tháng Tám?",
+    opts: {
+      A: "Đảng Cộng sản Đông Dương",
+      B: "Đảng Cộng sản Việt Nam",
+      C: "Đảng Lao động Việt Nam",
+      D: "Việt Nam Quốc dân đảng"
+    },
+    answer: "A"
+  },
+  {
+    id: 12,
+    q: "Hình thức đấu tranh nào sau đây không được sử dụng trong Tổng khởi nghĩa tháng Tám?",
+    opts: {
+      A: "Quân sự",
+      B: "Chính trị",
+      C: "Binh vận",
+      D: "Nghị trường"
+    },
+    answer: "D"
+  },
+  {
+    id: 13,
+    q: "Trước Tổng khởi nghĩa tháng Tám, Đảng đã xây dựng được căn cứ địa cách mạng nào?",
+    opts: {
+      A: "Việt Bắc",
+      B: "Đông Bắc",
+      C: "Tây Bắc",
+      D: "Nam Bộ"
+    },
+    answer: "A"
+  },
+  {
+    id: 14,
+    q: "Cuộc tập dượt đầu tiên chuẩn bị cho Cách mạng tháng Tám là",
+    opts: {
+      A: "Phong trào Đông Du",
+      B: "Phong trào Cần Vương",
+      C: "Phong trào 1930 – 1931",
+      D: "Phong trào 1936 – 1939"
+    },
+    answer: "C"
+  },
+  {
+    id: 15,
+    q: "Một trong những nguyên nhân khách quan dẫn đến thắng lợi của Cách mạng tháng Tám là",
+    opts: {
+      A: "Thắng lợi của phe Đồng minh",
+      B: "Sự chuẩn bị lâu dài của Đảng",
+      C: "Tinh thần đoàn kết của nhân dân",
+      D: "Sự giúp đỡ của Liên Xô, Trung Quốc"
+    },
+    answer: "A"
+  },
+  {
+    id: 16,
+    q: "Hành động thể hiện sự nhạy bén, kịp thời của Đảng Cộng sản Đông Dương trước những chuyển biến của tình hình thế giới vào đầu tháng 8/1945 là",
+    opts: {
+      A: "Thành lập Ủy ban Dân tộc Giải phóng Việt Nam",
+      B: "Triệu tập Hội nghị toàn quốc của Đảng ở Tân Trào",
+      C: "Gấp rút thành lập 19 ban xung phong Nam tiến",
+      D: "Lập Ủy ban khởi nghĩa toàn quốc, ra Quân lệnh số 1"
+    },
+    answer: "D"
+  },
+  {
+    id: 17,
+    q: "Đại hội Quốc dân họp ở Tân Trào (16 – 17/8/1945) đã thể hiện",
+    opts: {
+      A: "Ý chí thống nhất đoàn kết và nguyện vọng của toàn dân",
+      B: "Cuộc Tổng khởi nghĩa đã diễn ra và thắng lợi nhanh chóng",
+      C: "Chủ trương Tổng khởi nghĩa giành chính quyền của Đảng",
+      D: "Quyết tâm phối hợp với phe Đồng minh chống phát xít"
+    },
+    answer: "A"
+  },
+  {
+    id: 18,
+    q: "Trong Tổng khởi nghĩa tháng Tám năm 1945, thắng lợi ở Hà Nội, Huế, Sài Gòn có ý nghĩa",
+    opts: {
+      A: "Tổng khởi nghĩa giành chính quyền thắng lợi trong cả nước",
+      B: "Ảnh hưởng lớn và quyết định đến các địa phương trong cả nước",
+      C: "Là những cuộc khởi nghĩa hình mẫu",
+      D: "Đánh dấu Cách mạng tháng Tám thắng lợi hoàn toàn"
+    },
+    answer: "B"
+  },
+  {
+    id: 19,
+    q: "Thời cơ của Tổng khởi nghĩa tháng Tám được xác định trong khoảng thời gian từ khi",
+    opts: {
+      A: "Nhật đảo chính Pháp đến trước khi quân Đồng minh vào Đông Dương",
+      B: "Mỹ tuyên chiến với Nhật đến trước khi quân Đồng minh vào Đông Dương",
+      C: "Nhật đảo chính Pháp đến khi Nhật đầu hàng Đồng minh",
+      D: "Nhật đầu hàng Đồng minh đến trước khi quân Đồng minh vào Đông Dương"
+    },
+    answer: "D"
+  },
+  {
+    id: 20,
+    q: "Sự kiện nào dưới đây đánh dấu chế độ phong kiến ở Việt Nam sụp đổ hoàn toàn?",
+    opts: {
+      A: "Giành được chính quyền ở Hà Nội",
+      B: "Vua Bảo Đại tuyên bố thoái vị",
+      C: "Khởi nghĩa thắng lợi trong cả nước",
+      D: "Hồ Chí Minh đọc Tuyên ngôn Độc lập"
+    },
+    answer: "B"
+  },
+  {
+    id: 21,
+    q: "Thắng lợi nào của nhân dân Việt Nam đã góp phần xóa bỏ chủ nghĩa phát xít trên thế giới?",
+    opts: {
+      A: "Cách mạng tháng Tám 1945",
+      B: "Hiệp định Giơ-ne-vơ được ký kết",
+      C: "Hiệp định Pa-ri được ký kết",
+      D: "Chính quyền Xô viết thành lập"
+    },
+    answer: "A"
+  },
+  {
+    id: 22,
+    q: "Nguyên nhân nào sau đây là nhân tố quyết định dẫn tới thắng lợi của Tổng khởi nghĩa tháng Tám (1945)?",
+    opts: {
+      A: "Sự lãnh đạo sáng suốt của Đảng",
+      B: "Tinh thần đoàn kết quốc tế vô sản",
+      C: "Nhật đầu hàng quân Đồng minh",
+      D: "Thắng lợi của Hồng quân Liên Xô"
+    },
+    answer: "A"
+  },
+  {
+    id: 23,
+    q: "Một trong những nội dung thể hiện vai trò của Mặt trận Việt Minh đối với thắng lợi của Tổng khởi nghĩa tháng Tám (1945) là",
+    opts: {
+      A: "Lực lượng quyết định",
+      B: "Lực lượng xung kích",
+      C: "Đoàn kết toàn dân tộc",
+      D: "Chính đảng lãnh đạo"
+    },
+    answer: "C"
+  },
+  {
+    id: 24,
+    q: "Lực lượng nào sau đây đóng vai trò quyết định đến thắng lợi của Cách mạng tháng Tám (1945)?",
+    opts: {
+      A: "Lực lượng vũ trang",
+      B: "Lực lượng chính trị",
+      C: "Trí thức",
+      D: "Nông dân"
+    },
+    answer: "B"
+  },
+  {
+    id: 25,
+    q: "Lực lượng nào sau đây đóng vai trò xung kích, hỗ trợ cho lực lượng chính trị trong Cách mạng tháng Tám (1945)?",
+    opts: {
+      A: "Lực lượng vũ trang",
+      B: "Công nhân",
+      C: "Trí thức",
+      D: "Nông dân"
+    },
+    answer: "A"
+  },
+  {
+    id: 26,
+    q: "Giai cấp đông đảo, hăng hái nhất tham gia Cách mạng tháng Tám (1945) là",
+    opts: {
+      A: "Công nhân",
+      B: "Tư sản",
+      C: "Trí thức",
+      D: "Nông dân"
+    },
+    answer: "D"
+  },
+  {
+    id: 27,
+    q: "Trong Cách mạng tháng Tám năm 1945, nhân dân Việt Nam đã giành chính quyền từ tay kẻ thù nào?",
+    opts: {
+      A: "Nhật",
+      B: "Anh",
+      C: "Pháp",
+      D: "Mỹ"
+    },
+    answer: "A"
+  },
+  {
+    id: 28,
+    q: "Thắng lợi của Cách mạng tháng Tám năm 1945 có tác động như thế nào đến phong trào cách mạng thế giới?",
+    opts: {
+      A: "Làm thất bại chiến lược toàn cầu của Mỹ",
+      B: "Cổ vũ phong trào cách mạng trên thế giới",
+      C: "Góp phần làm tan rã hệ thống thuộc địa của Anh",
+      D: "Xây dựng thành trì vững chắc cho cách mạng vô sản"
+    },
+    answer: "B"
+  },
+  {
+    id: 29,
+    q: "Vì sao việc giành chính quyền ở Hà Nội, Huế, Sài Gòn có ý nghĩa quyết định đối với thắng lợi của Cách mạng tháng Tám (1945)?",
+    opts: {
+      A: "Là nơi đặt cơ quan đầu não của địch",
+      B: "Là các trung tâm chính trị, kinh tế lớn",
+      C: "Lực lượng địch ở đây mỏng và yếu",
+      D: "Tiêu diệt hoàn toàn lực lượng quân Nhật"
+    },
+    answer: "B"
+  },
+  {
+    id: 30,
+    q: "Một trong những điểm giống nhau giữa Cách mạng tháng Tám (1945) ở Việt Nam và Cách mạng tháng Mười Nga (1917) là",
+    opts: {
+      A: "Đưa nhân dân lao động lên làm chủ đất nước",
+      B: "Góp phần đánh bại chủ nghĩa phát xít",
+      C: "Mở ra thời kỳ hiện đại trong lịch sử nhân loại",
+      D: "Làm xoay chuyển hoàn toàn cục diện thế giới"
+    },
+    answer: "A"
+  },
+  {
+    id: 31,
+    q: "Bài học kinh nghiệm quan trọng trong lãnh đạo Tổng khởi nghĩa giành chính quyền năm 1945 của Đảng là",
+    opts: {
+      A: "Xây dựng liên minh công – nông và đoàn kết quốc tế",
+      B: "Đấu tranh công khai, hợp pháp là chủ yếu",
+      C: "Xây dựng lực lượng vũ trang hùng mạnh",
+      D: "Chớp thời cơ, khởi nghĩa kịp thời"
+    },
+    answer: "D"
+  },
+  {
+    id: 32,
+    q: "Bài học kinh nghiệm về tập hợp, tổ chức lực lượng trong Cách mạng tháng Tám năm 1945 là",
+    opts: {
+      A: "Thành lập mặt trận thống nhất rộng rãi",
+      B: "Giải quyết triệt để mọi yêu cầu của quần chúng",
+      C: "Tấn công nhiều kẻ thù cùng một lúc",
+      D: "Dựa hoàn toàn vào điều kiện khách quan"
+    },
+    answer: "A"
+  },
+  {
+    id: 33,
+    q: "Bài học nào của Cách mạng tháng Tám năm 1945 vẫn còn nguyên giá trị trong công cuộc xây dựng và phát triển đất nước hiện nay?",
+    opts: {
+      A: "Đoàn kết nhân dân ba nước Đông Dương",
+      B: "Kết hợp sức mạnh dân tộc với sức mạnh thời đại",
+      C: "Nhanh chóng nắm bắt và chớp thời cơ",
+      D: "Ưu tiên đấu tranh ngoại giao"
+    },
+    answer: "C"
+  },
+  {
+    id: 34,
+    q: "Nhận định “Cách mạng tháng Tám là ăn may, là lấp lỗ trống quyền lực” đúng hay sai? Vì sao?",
+    opts: {
+      A: "Đúng, vì lúc đó chưa có chính quyền hợp pháp",
+      B: "Đúng, vì quân Nhật đầu hàng, quân Đồng minh chưa vào",
+      C: "Sai, vì Đảng và nhân dân đã chuẩn bị chu đáo, lâu dài",
+      D: "Sai, vì có sự giúp đỡ trực tiếp của phe Đồng minh"
+    },
+    answer: "C"
+  },
+  {
+    id: 35,
+    q: "Nhận định nào sau đây đúng về vai trò của Chủ tịch Hồ Chí Minh đối với thắng lợi của Cách mạng tháng Tám năm 1945?",
+    opts: {
+      A: "Trực tiếp cùng Đảng lãnh đạo Cách mạng tháng Tám",
+      B: "Liên hệ với Liên Xô và Trung Quốc để xin viện trợ",
+      C: "Trực tiếp chỉ huy lực lượng vũ trang đánh chiếm mục tiêu",
+      D: "Soạn thảo và thông qua danh sách Chính phủ lâm thời"
+    },
+    answer: "A"
+  }];
+
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+shuffleArray(questionsData);
+
+const container = document.getElementById('questions');
+
+questionsData.forEach((item, index) => {
+  const qNumber = index + 1;
+
+  const div = document.createElement('div');
+  div.className = 'question';
+  div.id = 'q' + qNumber;
+
+  div.innerHTML = `
+    <div class="qnum">Câu ${qNumber}:</div>
+    <div class="qtext">${item.q}</div>
+    <div class="options">
+      ${Object.entries(item.opts).map(([key, val]) => `
+        <label class="opt">
+          <input type="radio" name="q${qNumber}" value="${key}">
+          <strong>${key}.</strong> ${val}
+        </label>
+      `).join('')}
+    </div>
+  `;
+
+  container.appendChild(div);
+});
+
+
+  // grading logic
+  const submitBtn = document.getElementById('submitBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const scoreDiv = document.getElementById('score');
+  const feedbackDiv = document.getElementById('feedback');
+
+  submitBtn.addEventListener('click', ()=>{
+  let correctCount = 0;
+  let total = questionsData.length;
+
+  for(let i=0;i<total;i++){
+    const qNumber = i + 1;
+    const selected = document.querySelector(`input[name="q${qNumber}"]:checked`);
+    const qDiv = document.getElementById('q'+qNumber);
+
+    qDiv.classList.remove('correct','wrong');
+    const old = qDiv.querySelector('.note'); if(old) old.remove();
+
+    const note = document.createElement('div');
+    note.className = 'note small';
+
+    if(!selected){
+      note.textContent = '(Chưa trả lời)';
+      qDiv.appendChild(note);
+      continue;
+    }
+
+    if(selected.value === questionsData[i].answer){
+      correctCount++;
+      qDiv.classList.add('correct');
+      note.textContent = `Đúng — đáp án: ${questionsData[i].answer}`;
+    } else {
+      qDiv.classList.add('wrong');
+      note.textContent = `Sai — đáp án đúng: ${questionsData[i].answer}`;
+    }
+
+    qDiv.appendChild(note);
+  }
+
+  scoreDiv.innerHTML = `<strong>Kết quả: ${correctCount}/${total}</strong>`;
+  submitBtn.disabled = true;
+});
+
+  resetBtn.addEventListener('click', ()=>{
+    document.getElementById('quizForm').reset();
+    // clear highlights/notes
+    for(let i=1;i<=questionsData.length;i++){
+      const qDiv = document.getElementById('q'+i);
+      qDiv.classList.remove('correct','wrong');
+      const note = qDiv.querySelector('.note'); if(note) note.remove();
+      const un = qDiv.querySelector('.small'); if(un) un.remove();
+    }
+    scoreDiv.innerHTML='';
+    feedbackDiv.innerHTML='';
+    submitBtn.disabled = false;
+  });
+  </script>
+</body>
+</html>
