@@ -22,7 +22,7 @@
   <main>
   
     <div class="links" style="display:flex; gap:16px; justify-content:space-between;">
-      <a class="card" style="flex:1; text-align:center;" href="2bài6.html">BÀI 6</a>
+      <a class="card" style="flex:1; text-align:center;" href="3bài6.html">BÀI 6</a>
       <a class="card" style="flex:1; text-align:center;" href="bài7.html">BÀI 7</a>
       <a class="card" style="flex:1; text-align:center;" href="bài8.html">BÀI 8</a>
       <a class="card" style="flex:1; text-align:center;" href="2bài9.html">BÀI 9</a>
