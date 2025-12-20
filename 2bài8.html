@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>35 Questions</title>
+  <style>
+    :root{--bg:#f6f8fb;--card:#fff;--accent:#2b6cb0;--correct:#28a745;--wrong:#dc3545}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;margin:0;background:var(--bg);color:#111}
+    header{background:linear-gradient(90deg,#1f6fb8,#2b6cb0);color:white;padding:18px 24px}
+    .container{max-width:980px;margin:18px auto;padding:18px}
+    .card{background:var(--card);border-radius:10px;box-shadow:0 6px 20px rgba(20,20,40,0.06);padding:18px}
+    h1{margin:0 0 6px;font-size:20px}
+    p.lead{margin:6px 0 16px;color:#334155}
+    .question{padding:12px;border-radius:8px;margin-bottom:10px;border:1px solid #eef2f7}
+    .qnum{font-weight:600;margin-bottom:6px}
+    .options{display:flex;gap:12px;flex-wrap:wrap}
+    label.opt{flex:1;min-width:150px;background:#f8fafc;padding:10px;border-radius:8px;border:1px solid #e6eef8;cursor:pointer}
+    input[type=radio]{margin-right:8px}
+    .controls{display:flex;gap:10px;align-items:center;margin-top:14px}
+    button{background:var(--accent);color:white;border:none;padding:10px 14px;border-radius:8px;cursor:pointer}
+    button.secondary{background:#6b7280}
+    .result{margin-top:14px;padding:12px;border-radius:8px}
+    .correct{background:rgba(40,167,69,0.08);border:1px solid rgba(40,167,69,0.18);color:var(--correct)}
+    .wrong{background:rgba(220,53,69,0.06);border:1px solid rgba(220,53,69,0.12);color:var(--wrong)}
+    .small{font-size:13px;color:#475569}
+    footer{max-width:980px;margin:20px auto;text-align:center;color:#64748b}
+    @media (max-width:700px){.options{flex-direction:column}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Vocabulary & Grammar - 50-question Test</h1>
+      <div class="small">Điền chọn A, B, C hoặc D cho mỗi câu. Nhấn "Nộp bài" để chấm điểm và xem đáp án.</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <form id="quizForm">
+        <div id="questions"></div>
+
+        <div class="controls">
+          <button type="button" id="submitBtn">Nộp bài</button>
+          <button type="button" id="resetBtn" class="secondary">Làm lại</button>
+          <div id="score" style="margin-left:auto"></div>
+        </div>
+      </form>
+
+      <div id="feedback" style="margin-top:12px"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="small">BÀI 6: CÁCH MẠNG THÁNG TÁM NĂM 1945</div>
+  </footer>
+
+  <script>
+const questionsData = [
+  {
+    id: 1,
+    q: "Từ 1954 đến 1956, miền Bắc thực hiện cải cách ruộng đất với mục tiêu nào sau đây?",
+    opts: {
+      A: "Người cày có ruộng.",
+      B: "Đánh đuổi để quốc.",
+      C: "Công bằng và dân chủ.",
+      D: "Thống nhất đất nước."
+    },
+    answer: "A"
+  },
+  {
+    id: 2,
+    q: "Trong giai đoạn từ 1954 đến 1959, mục tiêu đấu tranh chủ yếu của nhân dân miền Nam là",
+    opts: {
+      A: "đòi Mỹ - Diệm thi hành Hiệp định Giơ-ne-vơ.",
+      B: "xây dựng và phát triển các lực lượng vũ trang",
+      C: "chuẩn bị tổ chức các cuộc phản công quân sự.",
+      D: "xây dựng các căn cứ địa ở nông thôn, rừng núi."
+    },
+    answer: "A"
+  },
+  {
+    id: 3,
+    q: "Nghị quyết 15 của Đảng Lao động Việt Nam (1959) đã quyết định",
+    opts: {
+      A: "tiến hành chiến tranh du kích, xây dựng các căn cứ địa.",
+      B: "phát lệnh tổng khởi nghĩa tiến công trên toàn miền Nam.",
+      C: "để nhân dân nhân miền Nam sử dụng bạo lực khởi nghĩa.",
+      D: "phái lực lượng ra miền Bắc chở vũ khí vào Nam đánh Mỹ."
+    },
+    answer: "C"
+  },
+  {
+    id: 4,
+    q: "Nghị quyết 15 của Đảng Lao động Việt Nam (1959) ra đời trong hoàn cảnh",
+    opts: {
+      A: "Liên Xô, Trung Quốc ủng hộ mạnh mẽ.",
+      B: "thời cơ để tiến công cách mạng đã đến.",
+      C: "lực lượng vũ trang ba thứ quân phát triển.",
+      D: "cách mạng miền Nam bị tổn thất nặng nề."
+    },
+    answer: "D"
+  },
+  {
+    id: 5,
+    q: "Nội dung nào sau đây không phải là ý nghĩa của phong trào “Đồng khởi” (1959 - 1960) ở miền Nam Việt Nam?",
+    opts: {
+      A: "Lung lay tận gốc chính quyền Ngô Đình Diệm.",
+      B: "Đánh bại “chiến tranh cục bộ” của đế quốc Mỹ.",
+      C: "Bước phát triển mới của cách mạng miền Nam.",
+      D: "Cách mạng miền Nam chuyển sang thế phản công."
+    },
+    answer: "B"
+  },
+  {
+    id: 6,
+    q: "Đại hội đại biểu toàn quốc lần thứ III của Đảng Lao động Việt Nam (9/1960) đã xác định nhiệm vụ của cách mạng miền Bắc là",
+    opts: {
+      A: "tiến lên chủ nghĩa xã hội.",
+      B: "cải tạo xã hội chủ nghĩa.",
+      C: "trực tiếp chống Mỹ - Diệm.",
+      D: "chống chiến tranh phá hoại."
+    },
+    answer: "A"
+  },
+  {
+    id: 7,
+    q: "Đại hội đại biểu toàn quốc lần thứ III của Đảng Lao động Việt Nam (9/1960) đã xác định nhiệm vụ của cách mạng miền Nam là",
+    opts: {
+      A: "vừa kháng chiến vừa kiến quốc, xây dựng căn cứ địa.",
+      B: "đấu tranh đòi Mỹ - Diệm thi hành Hiệp định Giơ-ne-vơ.",
+      C: "hoàn thành cuộc cách mạng dân tộc dân chủ nhân dân.",
+      D: "khôi phục kinh tế, hàn gắn vết thương của chiến tranh."
+    },
+    answer: "C"
+  },
+  {
+    id: 8,
+    q: "Đại hội đại biểu toàn quốc lần thứ III của Đảng Lao động Việt Nam (9/1960) xác định cách mạng xã hội chủ nghĩa ở miền Bắc có vai trò",
+    opts: {
+      A: "quyết định nhất đối với sự phát triển của cách mạng cả nước.",
+      B: "quyết định trực tiếp đối với sự nghiệp giải phóng miền Nam.",
+      C: "quyết định thành công của cách mạng xã hội chủ nghĩa trên cả nước.",
+      D: "quyết định với sự nghiệp giải phóng miền Nam, thống nhất đất nước."
+    },
+    answer: "A"
+  },
+  {
+    id: 9,
+    q: "Từ năm 1961 - 1965, Mỹ thực hiện chiến lược chiến tranh nào ở miền Nam Việt Nam?",
+    opts: {
+      A: "Chiến tranh đặc biệt.",
+      B: "Chiến tranh cục bộ.",
+      C: "Chiến tranh đơn phương.",
+      D: "Việt Nam hóa chiến tranh."
+    },
+    answer: "A"
+  },
+  {
+    id: 10,
+    q: "Âm mưu cơ bản của Mỹ trong chiến lược “chiến tranh đặc biệt” là",
+    opts: {
+      A: "dùng người Việt đánh người Việt.",
+      B: "dùng chiến tranh nuôi chiến tranh.",
+      C: "giành lại quyền chủ động đã bị mất.",
+      D: "ngăn chặn sự chi viện của miền Bắc."
+    },
+    answer: "A"
+  },
+  {
+    id: 11,
+    q: "Một trong những thắng lợi của quân dân miền Nam trong cuộc chiến đấu chống chiến lược “chiến tranh đặc biệt” của Mỹ (1961 - 1965) là",
+    opts: {
+      A: "Núi Thành.",
+      B: "Đồng Xoài.",
+      C: "Vạn Tường.",
+      D: "Đồng khởi."
+    },
+    answer: "B"
+  },
+  {
+    id: 12,
+    q: "Một trong những thắng lợi của quân dân miền Nam trong cuộc chiến đấu chống chiến lược “chiến tranh cục bộ của Mỹ (1965 - 1968) là",
+    opts: {
+      A: "Đồng Xoài.",
+      B: "Vạn Tường.",
+      C: "Trung Lào.",
+      D: "Bình Giã."
+    },
+    answer: "B"
+  },
+  {
+    id: 13,
+    q: "Chiến thuật nào sau đây được Mỹ sử dụng trong chiến lược “chiến tranh cục bộ” ở miền Nam Việt Nam (1965 - 1968)?",
+    opts: {
+      A: "Tìm diệt và bình định.",
+      B: "Đánh chắc tiến chắc.",
+      C: "Chiến tranh tổng lực.",
+      D: "Bình định lần chiếm."
+    },
+    answer: "A"
+  },
+  {
+    id: 14,
+    q: "Trong cuộc chiến đấu chống chiến tranh đặc biệt (1961-1965) của quân dân miền Nam, ba mũi giáp công là",
+    opts: {
+      A: "quân sự, chính trị, ngoại giao.",
+      B: "quân sự, chính trị và binh vận.",
+      C: "quân sự, văn hóa và giáo dục.",
+      D: "tư tưởng, văn hóa và kinh tế."
+    },
+    answer: "B"
+  },
+  {
+    id: 15,
+    q: "Sau thất bại của chiến lược chiến tranh cục bộ (1965 - 1968), Mỹ đã làm gì để tiếp tục thực hiện âm mưu biến miền Nam thành căn cứ quân sự, thuộc địa kiểu mới?",
+    opts: {
+      A: "Gây cuộc chiến tranh phá hoại miền Bắc lần ba.",
+      B: "Tuyên bố “Mỹ hóa trở lại” chiến tranh xâm lược.",
+      C: "Thực hiện chiến lược Việt Nam hóa chiến tranh.",
+      D: "Thực hiện chiến lược chiến tranh đặc biệt mới."
+    },
+    answer: "C"
+  },
+  {
+    id: 16,
+    q: "Sau năm 1954, nguyên nhân nào sau đây khiến cho cách mạng miền Nam tổn thất nặng nề?",
+    opts: {
+      A: "Miền Bắc đã không chi viện về vũ khí.",
+      B: "Mỹ - Diệm khủng bố, đàn áp cách mạng.",
+      C: "Sự chống phá của các thế lực bên ngoài.",
+      D: "Trung Quốc, Liên Xô cô lập cách mạng."
+    },
+    answer: "B"
+  },
+  {
+    id: 17,
+    q: "Thực chất của các “ấp chiến lược” mà Mỹ và tay sai lập ra ở miền Nam là",
+    opts: {
+      A: "chiến thuật mới của Mỹ.",
+      B: "trại tập trung trá hình.",
+      C: "vùng căn cứ biệt kích.",
+      D: "hậu phương kháng chiến."
+    },
+    answer: "B"
+  },
+  {
+    id: 18,
+    q: "Thắng lợi nào của quân dân miền Nam đã đánh bại chiến thuật “trực thăng vận, thiết xa vận” của Mỹ và tay sai?",
+    opts: {
+      A: "Bình Giã.",
+      B: "Đông Khê.",
+      C: "Cao Bằng.",
+      D: "Phước Long."
+    },
+    answer: "A"
+  },
+  {
+    id: 19,
+    q: "Thắng lợi nào sau đây chứng tỏ khả năng đánh bại chiến tranh cục bộ (1965-1968) của quân và dân miền Nam?",
+    opts: {
+      A: "Đồng Xoài.",
+      B: "Vạn Tường.",
+      C: "Trung Lào.",
+      D: "Bình Giã."
+    },
+    answer: "B"
+  },
+  {
+    id: 20,
+    q: "Sau thất bại trong cuộc Tiến công chiến lược năm 1972 của quân dân miền Nam, Mỹ phải “Mỹ hóa trở lại” chiến tranh có nghĩa là",
+    opts: {
+      A: "chống phá kế hoạch lập Liên bang Đông Dương.",
+      B: "đã thế hiện quyết tâm đánh bại quân giải phóng.",
+      C: "sẽ sử dụng quân đội Sài Gòn như lực lượng chính.",
+      D: "thừa nhận sự thất bại của Việt Nam hóa chiến tranh."
+    },
+    answer: "D"
+  },
+  {
+    id: 21,
+    q: "Thắng lợi nào của quân và dân Việt Nam đã buộc Mỹ phải đến đàm phán tại hội nghị Pa-ris?",
+    opts: {
+      A: "Mậu Thân.",
+      B: "Vạn Tường.",
+      C: "Núi Thành.",
+      D: "Phước Long."
+    },
+    answer: "A"
+  },
+  {
+    id: 22,
+    q: "Một trong những âm mưu của Mỹ khi sử dụng B52 đánh phá Hà Nội và các thành phố lớn ở Việt Nam từ 18-12-1972 đến 29-12-1972 là",
+    opts: {
+      A: "buộc ký Hiệp định Pa-ri theo hướng có lợi cho Mỹ.",
+      B: "đem được tất cả các phi công bị bắt trở về nước Mỹ.",
+      C: "chi viện và cứu nguy cho mặt trận B3-Tây Nguyên.",
+      D: "khống chế, hủy diệt đường Hồ Chí Minh trên biển."
+    },
+    answer: "A"
+  },
+  {
+    id: 23,
+    q: "Thắng lợi nào sau đây của quân và dân miền Nam là cơ sở đề Đảng Lao động Việt Nam đề ra chủ trương giải phóng miền Nam?",
+    opts: {
+      A: "Mậu Thân.",
+      B: "Vạn Tường",
+      C: "Núi Thành.",
+      D: "Phước Long."
+    },
+    answer: "D"
+  },
+  {
+    id: 24,
+    q: "Mỹ giữ lại hai vạn cố vấn ở miền Nam, tăng cường viện trợ cho chính quyền Sài Gòn, thực chất của các hành động này là",
+    opts: {
+      A: "tiếp tục Việt Nam hóa chiến tranh.",
+      B: "đã góp phần xây dựng miền Nam.",
+      C: "thừa nhận sự thất bại ở Việt Nam.",
+      D: "từ bỏ chiến tranh ở Đông Dương."
+    },
+    answer: "A"
+  },
+  {
+    id: 25,
+    q: "Thủ đoạn mới được Mỹ sử dụng trong chiến lược Việt Nam hóa chiến tranh (1969-1973) là",
+    opts: {
+      A: "trực thăng vận và thiết xa vận.",
+      B: "tiến hành thỏa hiệp với Liên Xô.",
+      C: "xây dựng nhiều “ấp chiến lược”.",
+      D: "đã đưa quân Mỹ vào chiến đấu."
+    },
+    answer: "B"
+  },
+  {
+    id: 26,
+    q: "Một trong những âm mưu của Mỹ khi tiến hành chiến tranh phá miền Bắc lần thứ nhất từ 1965-1968 là",
+    opts: {
+      A: "buộc quân dân miền Bắc đầu hàng không điều kiện.",
+      B: "khống chế, hủy diệt đường Hồ Chí Minh trên biển.",
+      C: "phá hoại tiềm lực kinh tế, quốc phòng của miền Bắc.",
+      D: "buộc Việt Nam ký hiệp định theo hướng có lợi cho Mỹ."
+    },
+    answer: "C"
+  },
+  {
+    id: 27,
+    q: "Một trong những âm mưu của Mỹ khi tiến hành chiến tranh phá miền Bắc lần thứ hai (1972) là",
+    opts: {
+      A: "buộc quân dân Việt Nam đầu hàng không điều kiện.",
+      B: "khống chế và hủy diệt đường Hồ Chí Minh trên bộ.",
+      C: "cứu nguy cho quân đội Sài Gòn đang sắp bị tiêu diệt.",
+      D: "buộc Việt Nam ký hiệp định theo hướng có lợi cho Mỹ."
+    },
+    answer: "D"
+  },
+  {
+    id: 28,
+    q: "Một trong những nguyên nhân thúc đẩy quân dân miền Nam phải tập trung lực lượng binh khí kỹ thuật để giải phóng miền Nam trước mùa mưa năm 1975 là",
+    opts: {
+      A: "Trung Quốc đã ép phải đánh nhanh.",
+      B: "nhằm tận dụng thời cơ chiến lược mới.",
+      C: "lo ngại Mỹ về việc sẽ can thiệp trở lại.",
+      D: "nhận được viện trợ to lớn từ Liên Xô."
+    },
+    answer: "B"
+  },
+  {
+    id: 29,
+    q: "Một trong những điểm tương đồng của chiến thắng Điện Biên Phủ (1954) và “Điện Biên Phủ trên không” (1972) về tác động đến mặt trận ngoại giao là",
+    opts: {
+      A: "góp phần quyết định thắng lợi trên bàn đàm phán.",
+      B: "buộc kẻ thủ phải thừa nhận xâm lược và rút quân.",
+      C: "giành ưu thế ngoại giao cho phe xã hội chủ nghĩa.",
+      D: "buộc Mỹ rút hết quân xâm lược và tay sai về nước."
+    },
+    answer: "A"
+  },
+  {
+    id: 30,
+    q: "Một trong những điểm giống nhau của chiến lược Việt Nam hóa chiến tranh (1969-1973) và chiến lược chiến tranh cục bộ (1965-1968) mà Mỹ đã thực hiện ở miền Nam là",
+    opts: {
+      A: "lực lượng chiến đấu chủ yếu.",
+      B: "phạm vi thực hiện chiến tranh.",
+      C: "mục đích tiến hành chiến tranh.",
+      D: "thủ đoạn mới được thực hiện."
+    },
+    answer: "C"
+  },
+  {
+    id: 31,
+    q: "Một trong những điểm tương đồng về mục đích của Mỹ khi tiến hành hai cuộc chiến tranh phá hoại miền Bắc từ 1965 - 1968 và 1972 là",
+    opts: {
+      A: "buộc quân dân Việt Nam đầu hàng không điều kiện.",
+      B: "khống chế, hủy diệt đường Hồ Chí Minh trên biển.",
+      C: "phá hoại tiềm lực kinh tế, quốc phòng của miền Bắc.",
+      D: "buộc Việt Nam ký hiệp định theo hướng có lợi cho Mỹ."
+    },
+    answer: "C"
+  },
+  {
+    id: 32,
+    q: "Một trong những điểm giống nhau của chiến dịch Điện Biên Phủ (1954) và chiến dịch Hồ Chí Minh (1975) là",
+    opts: {
+      A: "huy động tối đa lực lượng.",
+      B: "phương châm chiến dịch.",
+      C: "phương thức đề chiến đấu.",
+      D: "sự phối hợp của không quân."
+    },
+    answer: "A"
+  },
+  {
+    id: 33,
+    q: "Bài học kinh nghiệm nào sau đây được rút ra trong cuộc kháng chiến chống Mỹ cứu nước (1954-1975) vẫn còn nguyên giá trị đối với hôm nay",
+    opts: {
+      A: "kiên quyết sử dụng bạo lực giải quyết tranh chấp.",
+      B: "kiên trì sự lãnh đạo của Đảng Cộng sản Việt Nam.",
+      C: "thực hiện cùng lúc nhiều nhiệm vụ cách mạng mới.",
+      D: "tranh thủ tối đa sự viện trợ từ các nước đồng minh."
+    },
+    answer: "B"
+  },
+  {
+    id: 34,
+    q: "Bài học kinh nghiệm nào sau đây được rút ra trong cuộc kháng chiến chống Mỹ cứu nước (1954-1975) vẫn còn nguyên giá trị đối với hôm nay",
+    opts: {
+      A: "thực hiện thế trận chiến tranh nhân dân.",
+      B: "xây dựng liên minh quân sự với Ấn Độ.",
+      C: "gia nhập vào các khối liên minh quân sự.",
+      D: "liên kết chặt chẽ với các nước Đông Âu."
+    },
+    answer: "A"
+  },
+  {
+    id: 35,
+    q: "Dựa vào bảng thông tin, hãy nối cột A với cột B để thấy được những thắng lợi đã góp phần đánh bại các chiến lược chiến tranh mà Mỹ đã áp dụng ở miền Nam.",
+    opts: {
+      A: "1B, 2A, 3D, 4C.",
+      B: "1B, 2D, 3А, 4C.",
+      C: "1B, 2C, 3D, 4A.",
+      D: "1B, 2C, 3D, 4B."
+    },
+    answer: "A"
+  }
+];
+
+
+   
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+shuffleArray(questionsData);
+
+const container = document.getElementById('questions');
+
+questionsData.forEach((item, index) => {
+  const qNumber = index + 1;
+
+  const div = document.createElement('div');
+  div.className = 'question';
+  div.id = 'q' + qNumber;
+
+  div.innerHTML = `
+    <div class="qnum">Câu ${qNumber}:</div>
+    <div class="qtext">${item.q}</div>
+    <div class="options">
+      ${Object.entries(item.opts).map(([key, val]) => `
+        <label class="opt">
+          <input type="radio" name="q${qNumber}" value="${key}">
+          <strong>${key}.</strong> ${val}
+        </label>
+      `).join('')}
+    </div>
+  `;
+
+  container.appendChild(div);
+});
+
+
+  // grading logic
+  const submitBtn = document.getElementById('submitBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const scoreDiv = document.getElementById('score');
+  const feedbackDiv = document.getElementById('feedback');
+
+  submitBtn.addEventListener('click', ()=>{
+  let correctCount = 0;
+  let total = questionsData.length;
+
+  for(let i=0;i<total;i++){
+    const qNumber = i + 1;
+    const selected = document.querySelector(`input[name="q${qNumber}"]:checked`);
+    const qDiv = document.getElementById('q'+qNumber);
+
+    qDiv.classList.remove('correct','wrong');
+    const old = qDiv.querySelector('.note'); if(old) old.remove();
+
+    const note = document.createElement('div');
+    note.className = 'note small';
+
+    if(!selected){
+      note.textContent = '(Chưa trả lời)';
+      qDiv.appendChild(note);
+      continue;
+    }
+
+    if(selected.value === questionsData[i].answer){
+      correctCount++;
+      qDiv.classList.add('correct');
+      note.textContent = `Đúng — đáp án: ${questionsData[i].answer}`;
+    } else {
+      qDiv.classList.add('wrong');
+      note.textContent = `Sai — đáp án đúng: ${questionsData[i].answer}`;
+    }
+
+    qDiv.appendChild(note);
+  }
+
+  scoreDiv.innerHTML = `<strong>Kết quả: ${correctCount}/${total}</strong>`;
+  submitBtn.disabled = true;
+});
+
+  resetBtn.addEventListener('click', ()=>{
+    document.getElementById('quizForm').reset();
+    // clear highlights/notes
+    for(let i=1;i<=questionsData.length;i++){
+      const qDiv = document.getElementById('q'+i);
+      qDiv.classList.remove('correct','wrong');
+      const note = qDiv.querySelector('.note'); if(note) note.remove();
+      const un = qDiv.querySelector('.small'); if(un) un.remove();
+    }
+    scoreDiv.innerHTML='';
+    feedbackDiv.innerHTML='';
+    submitBtn.disabled = false;
+  });
+  </script>
+</body>
+</html>
