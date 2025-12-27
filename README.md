@@ -26,7 +26,7 @@
       <a class="card" style="flex:1; text-align:center;" href="2bài7.html">BÀI 7</a>
       <a class="card" style="flex:1; text-align:center;" href="2bài8.html">BÀI 8</a>
       <a class="card" style="flex:1; text-align:center;" href="4bài9.html">BÀI 9</a>
-      <a class="card" style="flex:1; text-align:center;" href="DUNGSAI.html">ĐÚNG SAI</a>
+      <a class="card" style="flex:1; text-align:center;" href="Đúng sai.html">ĐÚNG SAI</a>
     </div>
 
     
