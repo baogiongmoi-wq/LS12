@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>35 Questions</title>
+  <title>Vocabulary & Grammar Test - 45 Questions</title>
   <style>
     :root{--bg:#f6f8fb;--card:#fff;--accent:#2b6cb0;--correct:#28a745;--wrong:#dc3545}
     body{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;margin:0;background:var(--bg);color:#111}
@@ -31,7 +31,7 @@
 <body>
   <header>
     <div class="container">
-      <h1>Vocabulary & Grammar - 50-question Test</h1>
+      <h1>Vocabulary & Grammar - 45-question Test</h1>
       <div class="small">Điền chọn A, B, C hoặc D cho mỗi câu. Nhấn "Nộp bài" để chấm điểm và xem đáp án.</div>
     </div>
   </header>
@@ -53,343 +53,332 @@
   </main>
 
   <footer>
-    <div class="small">BÀI 6: CÁCH MẠNG THÁNG TÁM NĂM 1945</div>
+    <div class="small">Đề gốc: Bài trắc nghiệm 50 câu (Vocabulary & Grammar)</div>
   </footer>
 
   <script>
-   const questionsData = [
+  // --- QUESTIONS DATA ---
+    const questionsData = [
   {
     id: 1,
-    q: "Một trong những nội dung của tình hình thế giới khi cuộc kháng chiến chống Pháp (1945 - 1954) của nhân dân Việt Nam nổ ra là",
+    q: "Nội dung nào sau đây không phải là truyền thống quý báu của dân tộc Việt Nam?",
     opts: {
-      A: "hệ thống xã hội chủ nghĩa đang hình thành",
-      B: "cách mạng Cuba đã giành được thắng lợi",
-      C: "xu thế hòa hoãn Đông - Tây đã xuất hiện",
-      D: "chiến lược toàn cầu của Mỹ đang thất bại"
+      A: "Yêu nước.",
+      B: "Đoàn kết.",
+      C: "Nhân nghĩa.",
+      D: "Hiếu chiến."
+    },
+    answer: "D"
+  },
+  {
+    id: 2,
+    q: "Nhiệm vụ cấp bách nhất đặt ra cho dân tộc Việt Nam trong những năm cuối thế kỷ XIX đầu thế kỷ XX là",
+    opts: {
+      A: "giành độc lập dân tộc.",
+      B: "đòi dân sinh dân chủ.",
+      C: "cách mạng ruộng đất.",
+      D: "cơm áo và hòa bình."
     },
     answer: "A"
   },
   {
-    id: 2,
-    q: "Một trong những nội dung của tình hình Việt Nam khi cuộc kháng chiến chống Pháp (1945 - 1954) nổ ra là",
-    opts: {
-      A: "nhân dân đã giành quyền làm chủ đất nước",
-      B: "nạn đói chưa được đẩy lùi gây khó khăn lớn",
-      C: "phải đối phó với cả Tưởng, Anh, Mỹ, Pháp",
-      D: "Mỹ thiết lập quan hệ ngoại giao với Việt Nam"
-    },
-    answer: "B"
-  },
-  {
     id: 3,
-    q: "Một trong những khó khăn thử thách mà cách mạng Việt Nam phải đương đầu sau thắng lợi của Cách mạng tháng Tám (1945) là",
+    q: "Một trong những phẩm chất tốt đẹp của xứ Nghệ đã được Chủ tịch Hồ Chí Minh tiếp thu và thể hiện rõ nét trong cuộc đời hoạt động cách mạng là",
     opts: {
-      A: "các nước đế quốc bao vây, cấm vận kinh tế",
-      B: "những hậu quả nặng nề của chiến tranh để lại",
-      C: "quân đội các nước Đồng minh lũ lượt kéo vào",
-      D: "quân Tưởng hỗ trợ cho Pháp đánh Nam Bộ"
+      A: "trọng nghĩa khinh tài.",
+      B: "ý chí trong học tập.",
+      C: "giỏi nghề thủ công.",
+      D: "kinh nghiệm đi biển."
     },
-    answer: "C"
+    answer: "A"
   },
   {
     id: 4,
-    q: "Để mở đầu cho cuộc chiến tranh xâm lược Việt Nam lần thứ hai, Pháp đã tấn công",
+    q: "Chủ tịch Hồ Chí Minh sinh ra trong một gia đình",
     opts: {
-      A: "trụ sở Ủy ban hành chính Nam Bộ",
-      B: "cơ quan Trung ương cục miền Nam",
-      C: "căn cứ Củ Chi và địa đạo Vĩnh Mốc",
-      D: "cửa biển Thuận An và kinh đô Huế"
+      A: "có truyền thống yêu nước.",
+      B: "có kinh nghiệm đi biển.",
+      C: "nông dân rất nghèo khổ.",
+      D: "công nhân kỹ thuật cao."
     },
     answer: "A"
   },
   {
     id: 5,
-    q: "Khi Pháp xâm lược Nam Bộ, Đảng và Chính phủ Việt Nam đã có hành động nào sau đây?",
+    q: "Một trong những ngôi trường mà Chủ tịch Hồ Chí Minh từng theo học là",
     opts: {
-      A: "tiến hành đàm phán khẩn cấp với Pháp",
-      B: "tố cáo hành vi của Pháp đến Liên hợp quốc",
-      C: "đưa toàn bộ quân đội vào Nam chiến đấu",
-      D: "huy động cả nước để chi viện cho Nam Bộ"
+      A: "Hoàng Phố.",
+      B: "Đồng Khánh.",
+      C: "Quốc Tử Giám.",
+      D: "Quốc học Huế."
     },
     answer: "D"
   },
   {
     id: 6,
-    q: "Một trong những nội dung của đường lối kháng chiến chống Pháp (1945 - 1954) là",
+    q: "Trong quá trình ra đi tìm đường cứu nước (1912–1930), Nguyễn Tất Thành không đặt chân đến quốc gia nào?",
     opts: {
-      A: "đoàn kết kháng chiến",
-      B: "vườn không nhà trống",
-      C: "toàn dân kháng chiến",
-      D: "đánh nhanh thắng nhanh"
+      A: "Trung Quốc.",
+      B: "Liên Xô.",
+      C: "Nhật Bản.",
+      D: "Thái Lan."
     },
     answer: "C"
   },
   {
     id: 7,
-    q: "Đâu là một trong những thắng lợi mà nhân dân Việt Nam đã giành được trong cuộc kháng chiến chống Pháp (1945 - 1954)?",
+    q: "Con đường cứu nước giải phóng dân tộc Việt Nam được Nguyễn Ái Quốc tìm thấy vào tháng 7-1920 là",
     opts: {
-      A: "Chiến thắng An Lão",
-      B: "Chiến thắng Việt Bắc",
-      C: "Chiến thắng Cửa Việt",
-      D: "Chiến thắng Vạn Tường"
+      A: "cách mạng vô sản.",
+      B: "dân chủ tư sản.",
+      C: "xã hội chủ nghĩa.",
+      D: "cách mạng bạo lực."
     },
-    answer: "B"
+    answer: "A"
   },
   {
     id: 8,
-    q: "Hoàn cảnh ra đời của kế hoạch quân sự Nava (1953) là",
+    q: "Năm 1917, Nguyễn Tất Thành tham gia vào tổ chức nào?",
     opts: {
-      A: "Việt Nam đang gặp nhiều khó khăn",
-      B: "cuộc chiến tranh Triều Tiên bùng nổ",
-      C: "quân Pháp thiệt hại hết sức nặng nề",
-      D: "Mỹ ép Pháp kết thúc nhanh chiến tranh"
+      A: "Đảng Cộng sản Pháp.",
+      B: "Đảng Bảo thủ Anh.",
+      C: "Đảng Xã hội Pháp.",
+      D: "Đảng Cộng hòa Mỹ."
     },
     answer: "C"
   },
   {
     id: 9,
-    q: "Trong giai đoạn một của kế hoạch Nava, Pháp tiến hành phòng ngự ở",
+    q: "Từ đầu thế kỷ XX, mâu thuẫn giữa nhân dân Việt Nam với thực dân Pháp ngày càng",
     opts: {
-      A: "Bắc Bộ",
-      B: "Nam Bộ",
-      C: "Đà Nẵng",
-      D: "Trung Bộ"
+      A: "gay gắt.",
+      B: "hòa giải.",
+      C: "hòa dịu.",
+      D: "ổn định."
     },
     answer: "A"
   },
   {
     id: 10,
-    q: "Một trong những nội dung của phương hướng tiến công chiến lược Đông Xuân 1953 - 1954 buộc Pháp phải",
+    q: "Một trong những ngôi trường Nguyễn Tất Thành đã từng dạy học là",
     opts: {
-      A: "tập trung lực lượng",
-      B: "phân tán lực lượng",
-      C: "chiếm đất giành dân",
-      D: "đánh nhanh rút gọn"
+      A: "Nam Đàn.",
+      B: "Đồng Khánh.",
+      C: "Quốc học Huế.",
+      D: "Dục Thanh."
     },
-    answer: "B"
+    answer: "D"
   },
   {
     id: 11,
-    q: "Tháng 11-1953, khi phát hiện bộ đội Việt Nam tiến lên Tây Bắc, Nava đã điều quân chiếm giữ",
+    q: "Cuối năm 1924, Nguyễn Ái Quốc rời Liên Xô đi",
     opts: {
-      A: "Bắc Tây Nguyên",
-      B: "Đông Nam Bộ",
-      C: "Điện Biên Phủ",
-      D: "Tây Trường Sơn"
+      A: "Thái Lan.",
+      B: "Việt Nam.",
+      C: "Trung Quốc.",
+      D: "Đông Đức."
     },
     answer: "C"
   },
   {
     id: 12,
-    q: "Một trong những mục tiêu của Việt Nam khi mở chiến dịch Điện Biên Phủ (1954) là",
+    q: "Trước khi bị biến thành quốc gia thuộc địa nửa phong kiến, Việt Nam là quốc gia",
     opts: {
-      A: "tiêu diệt sinh lực địch",
-      B: "kết thúc chiến tranh",
-      C: "mở rộng căn cứ địa",
-      D: "liên lạc với bên ngoài"
+      A: "tự do.",
+      B: "độc lập.",
+      C: "dân chủ.",
+      D: "giàu có."
     },
-    answer: "A"
+    answer: "B"
   },
   {
     id: 13,
-    q: "Sau Đại hội đại biểu lần thứ II (2-1951), Đảng Cộng sản Đông Dương có tên gọi là",
+    q: "Ngày 5/6/1911, Nguyễn Tất Thành rời bến cảng Nhà Rồng với tên gọi mới là",
     opts: {
-      A: "Đảng Lao động Việt Nam",
-      B: "Việt Nam quốc dân đảng",
-      C: "An Nam Cộng sản đảng",
-      D: "Đông Dương Cộng sản đảng"
+      A: "Văn Ba.",
+      B: "Ông Ké.",
+      C: "Thầu Chín.",
+      D: "Lý Thụy."
     },
     answer: "A"
   },
   {
     id: 14,
-    q: "Chiến dịch tấn công tập đoàn cứ điểm Điện Biên Phủ diễn ra trong bao nhiêu đợt?",
+    q: "Đầu năm 1930, Nguyễn Ái Quốc đã có hoạt động nào sau đây?",
     opts: {
-      A: "2",
-      B: "3",
-      C: "4",
-      D: "5"
-    },
-    answer: "B"
-  },
-  {
-    id: 15,
-    q: "Một trong những nguyên nhân chủ quan dẫn đến thắng lợi của cuộc kháng chiến chống Pháp (1945 - 1954) là",
-    opts: {
-      A: "sự lãnh đạo đúng đắn của Đảng",
-      B: "viện trợ to lớn của Trung Quốc",
-      C: "ba nước Đông Dương đoàn kết",
-      D: "phong trào phản đối chiến tranh"
-    },
-    answer: "A"
-  },
-  {
-    id: 16,
-    q: "Một trong những nguyên nhân bùng nổ của cuộc kháng chiến toàn quốc chống Pháp (12-1946) là do",
-    opts: {
-      A: "Pháp bội ước, buộc Việt Nam đầu hàng",
-      B: "nhân dân Việt Nam quyết tâm chiến đấu",
-      C: "Việt Nam có được giúp đỡ của Liên Xô",
-      D: "Pháp không chấp nhận ký hiệp định mới"
-    },
-    answer: "A"
-  },
-  {
-    id: 17,
-    q: "Một trong những cơ sở để Đảng Cộng sản Đông Dương đề ra đường lối kháng chiến toàn dân là do",
-    opts: {
-      A: "Pháp đã suy yếu, tổn thất",
-      B: "truyền thống của dân tộc",
-      C: "Mỹ đã hỗ trợ cho Pháp",
-      D: "tình hình thế giới yêu cầu"
-    },
-    answer: "B"
-  },
-  {
-    id: 18,
-    q: "Thắng lợi nào đã đánh bại chiến thuật đánh nhanh thắng nhanh của Pháp?",
-    opts: {
-      A: "Tầm Vu (1948)",
-      B: "Biên Giới (1950)",
-      C: "Việt Bắc (1947)",
-      D: "Hòa Bình (1951)"
+      A: "Thành lập Mặt trận Việt Minh.",
+      B: "Soạn thảo Luận cương chính trị.",
+      C: "Hợp nhất các tổ chức cộng sản.",
+      D: "Trở về nước lãnh đạo cách mạng."
     },
     answer: "C"
   },
   {
-    id: 19,
-    q: "Quân dân Việt Nam giành quyền chủ động trên chiến trường chính Bắc Bộ sau thắng lợi của chiến dịch",
+    id: 15,
+    q: "Trong giai đoạn 1960-1969, Hồ Chí Minh đảm nhận cương vị nào?",
     opts: {
-      A: "Tầm Vu (1948)",
-      B: "Biên Giới (1950)",
-      C: "Việt Bắc (1947)",
-      D: "Hòa Bình (1951)"
+      A: "Chủ tịch Quốc hội.",
+      B: "Chủ tịch Đảng.",
+      C: "Tổng Bí thư.",
+      D: "Thủ tướng."
     },
     answer: "B"
   },
   {
-    id: 20,
-    q: "Pháp đề ra kế hoạch Nava (1953) với mục đích chính là",
+    id: 16,
+    q: "Trong thời cận đại, vì sao Nghệ An sớm có điều kiện tiếp thu những tư tưởng mới?",
     opts: {
-      A: "kết thúc chiến tranh trong danh dự",
-      B: "đưa được tù binh Pháp về nước",
-      C: "tiêu diệt hoàn toàn bộ đội Việt Nam",
-      D: "thành lập Liên bang Đông Dương"
+      A: "Do truyền thống đấu tranh anh dũng.",
+      B: "Có khu công nghiệp Vinh - Bến Thủy.",
+      C: "Pháp đã cho mở nhiều trường học ở đây.",
+      D: "Ảnh hưởng của Cách mạng tháng Mười."
+    },
+    answer: "B"
+  },
+  {
+    id: 17,
+    q: "Mâu thuẫn chủ yếu trong xã hội Việt Nam đầu thế kỷ XX là",
+    opts: {
+      A: "dân tộc.",
+      B: "giai cấp.",
+      C: "tầng lớp.",
+      D: "tôn giáo."
+    },
+    answer: "A"
+  },
+  {
+    id: 18,
+    q: "Tháng 12-1920, Nguyễn Ái Quốc đã trở thành",
+    opts: {
+      A: "người cộng sản đầu tiên của Việt Nam.",
+      B: "lãnh tụ tối cao của cách mạng Việt Nam.",
+      C: "ủy viên Ban chấp hành Quốc tế cộng sản.",
+      D: "phái viên của Quốc tế cộng sản ở châu Phi."
+    },
+    answer: "A"
+  },
+  {
+    id: 19,
+    q: "Tổ chức nào do Nguyễn Ái Quốc thành lập, được xem là tiền thân của Đảng Cộng sản Việt Nam?",
+    opts: {
+      A: "Đông Dương Cộng sản liên đoàn.",
+      B: "Đông Dương Cộng sản đảng.",
+      C: "Hội Việt Nam Cách mạng thanh niên.",
+      D: "Hội Liên hiệp các dân tộc thuộc địa."
+    },
+    answer: "C"
+  },
+  {
+    id: 20,
+    q: "Vì sao đầu năm 1930, Nguyễn Ái Quốc phải tiến hành hợp nhất các tổ chức cộng sản?",
+    opts: {
+      A: "Cách mạng Việt Nam đứng trước nguy cơ chia rẽ.",
+      B: "Sự chỉ đạo trực tiếp của Quốc tế cộng sản.",
+      C: "Yêu cầu thiết tha của nhân dân Đông Dương.",
+      D: "Các tổ chức cộng sản đã yêu cầu."
     },
     answer: "A"
   },
   {
     id: 21,
-    q: "Một trong những mục đích của Pháp khi tấn công lên Việt Bắc (1947) là",
+    q: "Một trong những nguyên nhân Nguyễn Tất Thành sang phương Tây tìm đường cứu nước là",
     opts: {
-      A: "kết thúc chiến tranh trong danh dự",
-      B: "đưa được tù binh Pháp về nước",
-      C: "tiêu diệt cơ quan đầu não kháng chiến",
-      D: "thành lập Liên bang Đông Dương"
+      A: "tìm hiểu các nước phương Tây làm như thế nào.",
+      B: "con đường đi sang phương Tây dễ hơn.",
+      C: "phương Tây có nhiều đại học nổi tiếng.",
+      D: "mục đích chính là kiếm sống."
     },
-    answer: "C"
+    answer: "A"
   },
   {
     id: 22,
-    q: "Tập đoàn cứ điểm Điện Biên Phủ có hạn chế nào sau đây?",
+    q: "Biểu hiện nào cho thấy Nguyễn Tất Thành sớm có tư tưởng yêu nước chống Pháp?",
     opts: {
-      A: "chỉ có thể tiếp tế bằng đường không",
-      B: "quá đông quân trên địa bàn nhỏ",
-      C: "các cứ điểm không vững chắc",
-      D: "hỏa lực chi viện yếu"
+      A: "Tham gia phong trào chống thuế ở Huế.",
+      B: "Tham gia phong trào Đông Du.",
+      C: "Tham gia phong trào Cần Vương.",
+      D: "Tập hợp sĩ phu đánh Pháp."
     },
     answer: "A"
   },
   {
     id: 23,
-    q: "Vì sao Điện Biên Phủ được coi là “bất khả xâm phạm”?",
+    q: "Ngày 2-9-1969, Hồ Chủ tịch qua đời là sự kiện",
     opts: {
-      A: "căn cứ quân sự lớn nhất châu Á",
-      B: "có lực lượng đặc nhiệm Mỹ",
-      C: "quân đông, vũ khí hiện đại, cứ điểm kiên cố",
-      D: "Mỹ sẵn sàng dùng bom nguyên tử"
+      A: "gây nhiều khó khăn cho cách mạng.",
+      B: "tổn thất to lớn của cách mạng Việt Nam.",
+      C: "gây chia rẽ trong Đảng.",
+      D: "cơ hội để Mỹ tấn công miền Bắc."
     },
-    answer: "C"
+    answer: "B"
   },
   {
     id: 24,
-    q: "Hai nhiệm vụ chiến lược của cách mạng Việt Nam giai đoạn 1945 - 1954 là",
+    q: "Một nguyên nhân dẫn đến thành công của hội nghị hợp nhất các tổ chức cộng sản năm 1930 là",
     opts: {
-      A: "kháng chiến và kiến quốc",
-      B: "kháng chiến và lao động",
-      C: "chiến đấu và sản xuất",
-      D: "kháng chiến và cải cách"
+      A: "tài năng, uy tín của Nguyễn Ái Quốc.",
+      B: "chỉ đạo của Quốc tế thứ hai.",
+      C: "nguyện vọng quần chúng.",
+      D: "kinh nghiệm thế giới."
     },
     answer: "A"
   },
   {
     id: 25,
-    q: "Âm mưu chính của Pháp - Mỹ khi xây dựng tập đoàn cứ điểm Điện Biên Phủ là",
+    q: "Điểm khác biệt trong con đường cứu nước của Nguyễn Ái Quốc và Phan Bội Châu là",
     opts: {
-      A: "thu hút và tiêu diệt chủ lực Việt Nam",
-      B: "bảo vệ Tây Bắc",
-      C: "giành lại thế chủ động",
-      D: "ngăn chặn liên lạc Việt - Lào"
-    },
-    answer: "A"
-  },
-  {
-    id: 26,
-    q: "Một trong những điểm chung của kế hoạch Rơ ve (1949), kế hoạch Đờ Lát Đơ Tatxinhi (1950) và kế hoạch Nava (1953) là đều nhằm",
-    opts: {
-      A: "khóa chặt biên giới Việt - Trung",
-      B: "kết thúc chiến tranh xâm lược",
-      C: "thành lập chính phủ tay sai bù nhìn",
-      D: "giành thế chủ động trên chiến trường"
-    },
-    answer: "B"
-  },
-  {
-    id: 27,
-    q: "Một trong những điểm tương đồng về mục tiêu mở các chiến dịch trong kháng chiến chống Pháp (1945 - 1954) của quân và dân Việt Nam là",
-    opts: {
-      A: "củng cố căn cứ địa Việt Bắc",
-      B: "tiêu diệt toàn bộ sinh lực địch",
-      C: "giải phóng Tây Bắc, Trung Lào",
-      D: "để đánh bại kế hoạch bình định"
-    },
-    answer: "B"
-  },
-  {
-    id: 28,
-    q: "Một trong những điểm mới trong Đại hội đại biểu lần thứ II của Đảng Cộng sản Đông Dương (2 - 1951) là",
-    opts: {
-      A: "đã nghe và thông qua báo cáo chính trị",
-      B: "xác định nhiệm vụ  cách mạng từng miền",
-      C: "đã đưa Đảng ra hoạt động công khai",
-      D: "tổng kết kinh nghiệm đấu tranh của Đảng"
+      A: "hết lòng vì cách mạng.",
+      B: "coi trọng thanh niên.",
+      C: "Nguyễn Ái Quốc đi sang phương Tây.",
+      D: "mục tiêu giải phóng dân tộc."
     },
     answer: "C"
   },
   {
-    id: 29,
-    q: "Đâu là bài học kinh nghiệm trong cuộc kháng chiến chống Pháp (1945 - 1954) được tiếp tục vận dụng trong kháng chiến chống Mỹ cứu nước (1954 - 1975)?",
+    id: 26,
+    q: "Điểm khác biệt giữa Nguyễn Ái Quốc và Phan Chu Trinh là",
     opts: {
-      A: "kết hợp sức mạnh dân tộc với sức mạnh thời đại",
-      B: "kiên trì nguyên tắc dĩ bất biến ứng vạn biến",
-      C: "thực hiện cùng lúc nhiều nhiệm vụ chiến lược",
-      D: "tham gia khối liên minh quân sự Liên Xô"
+      A: "mục tiêu giải phóng dân tộc.",
+      B: "cống hiến cho cách mạng.",
+      C: "khuynh hướng cứu nước.",
+      D: "ý chí giành độc lập."
+    },
+    answer: "C"
+  },
+  {
+    id: 27,
+    q: "Điểm giống nhau về vai trò của Hồ Chí Minh giai đoạn 1945-1954 và 1960-1969 là",
+    opts: {
+      A: "lãnh tụ tối cao của cách mạng.",
+      B: "đứng đầu Chính phủ.",
+      C: "trực tiếp chỉ huy chiến đấu.",
+      D: "lãnh đạo Quốc hội."
     },
     answer: "A"
   },
   {
-    id: 30,
-    q: "Bài học kinh nghiệm nào sau đây được rút ra từ cuộc kháng chiến chống Pháp (1945 - 1954) vẫn còn nguyên giá trị đến ngày nay?",
+    id: 28,
+    q: "Nội dung nào không đúng về đánh giá của thế giới đối với Hồ Chí Minh?",
     opts: {
-      A: "phát huy tinh thần yêu nước của nhân dân",
-      B: "xây dựng nhiều tập đoàn quân chiến đấu",
-      C: "thực hiện cùng lúc bốn nhiệm vụ chiến lược",
-      D: "tham gia khối liên minh quân sự của Liên Xô"
+      A: "Anh hùng giải phóng dân tộc.",
+      B: "Chiến sĩ cộng sản kiên cường.",
+      C: "Danh nhân văn hóa thế giới.",
+      D: "Nhà dân tộc chủ nghĩa hẹp hòi."
+    },
+    answer: "D"
+  },
+  {
+    id: 29,
+    q: "Điểm chung giữa Hồ Chí Minh với Jeanne d’Arc và Gandhi là",
+    opts: {
+      A: "cống hiến trọn đời cho dân tộc.",
+      B: "chủ tịch nước đầu tiên.",
+      C: "đấu tranh ôn hòa.",
+      D: "danh nhân văn hóa."
     },
     answer: "A"
   }
 ];
-
 
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
