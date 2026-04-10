@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>35 Questions</title>
+  <title>Vocabulary & Grammar Test - 45 Questions</title>
   <style>
     :root{--bg:#f6f8fb;--card:#fff;--accent:#2b6cb0;--correct:#28a745;--wrong:#dc3545}
     body{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;margin:0;background:var(--bg);color:#111}
@@ -31,7 +31,7 @@
 <body>
   <header>
     <div class="container">
-      <h1>Vocabulary & Grammar - 50-question Test</h1>
+      <h1>Vocabulary & Grammar - 45-question Test</h1>
       <div class="small">Điền chọn A, B, C hoặc D cho mỗi câu. Nhấn "Nộp bài" để chấm điểm và xem đáp án.</div>
     </div>
   </header>
@@ -53,45 +53,332 @@
   </main>
 
   <footer>
-    <div class="small">BÀI 6: CÁCH MẠNG THÁNG TÁM NĂM 1945</div>
+    <div class="small">Đề gốc: Bài trắc nghiệm 50 câu (Vocabulary & Grammar)</div>
   </footer>
 
   <script>
-const questionsData = [
-  { id: 1, q: "Một trong những nội dung thuận lợi của cách mạng Việt Nam từ sau tháng 4-1975 là", opts: { A: "được sự lãnh đạo của Đảng.", B: "Mỹ dỡ bỏ những cấm kinh tế.", C: "Khơ-me đỏ nên nắm quyền.", D: "Trung Quốc cải cách, mở cửa." }, answer: "A" },
-  { id: 2, q: "Một trong những nội dung khó khăn của cách mạng Việt Nam từ sau tháng 4/1975 là", opts: { A: "có được sự lãnh đạo của Đảng.", B: "hậu quả chiến tranh nặng nề.", C: "Khơ-me đỏ nên nắm quyền.", D: "Trung Quốc cải cách, mở cửa." }, answer: "B" },
-  { id: 3, q: "Sau khi lên nắm quyền (4/1975) chính quyền Pôn-Pốt đã có hành động nào sau đây?", opts: { A: "Đi thăm Mỹ để mở rộng quan hệ đối ngoại cho Cam-pu-chia.", B: "Ủng hộ hết lòng cho công cuộc xây dựng đất nước Việt Nam.", C: "Phát động chiến tranh xâm lược biên giới Tây Nam Việt Nam.", D: "Liên kết với các nước Đông Nam Á để chống lại Trung Quốc." }, answer: "C" },
-  { id: 4, q: "Một trong những hành động khiêu khích, xâm phạm lãnh thổ của chính quyền Pôn-pốt đối với Việt Nam sau ngày 30/4/1975 là", opts: { A: "tổ chức cho người Khơ-me ở Việt Nam biểu tình.", B: "phái biệt kích để xâm nhập vào Hà Nội phá hoại.", C: "cho máy bay thả bom để phong tỏa cửa sông lớn.", D: "xâm nhập vào vùng biên giới trên đất liền Việt Nam." }, answer: "D" },
-  { id: 5, q: "Một trong những nơi ghi dấu tội ác của tập đoàn Khơ-me đỏ đối với nhân dân Việt Nam là", opts: { A: "An Giang.", B: "Cà Mau.", C: "Bạc Liêu.", D: "Cần Thơ." }, answer: "A" },
-  { id: 6, q: "Nội dung nào sau đây phản ánh đúng tình hình quan hệ Việt - Trung từ giữa năm 1975?", opts: { A: "Vẫn duy trì rất tốt đẹp.", B: "Dần trở nên căng thẳng.", C: "Chuyển sang đối đầu.", D: "Trung Quốc xâm lược." }, answer: "B" },
-  { id: 7, q: "Nội dung phản ánh không đúng tình hình của mối quan hệ Việt-Trung từ giữa năm 1975 là Trung Quốc", opts: { A: "chấm dứt viện trợ kinh tế.", B: "rút các chuyên gia về nước.", C: "xâm phạm khu vực biên giới.", D: "ủng hộ Việt Nam toàn diện." }, answer: "D" },
-  { id: 8, q: "Một trong những nơi diễn ra các trận đánh quyết liệt của quân và dân Việt Nam chống lại sự xâm lược của quân Trung Quốc (1979) là", opts: { A: "Cao Bằng.", B: "Thái Nguyên.", C: "Nam Định.", D: "Phú Thọ." }, answer: "A" },
-  { id: 9, q: "Âm mưu của Trung Quốc khi tấn công Việt Nam năm 1979 là", opts: { A: "thần tốc, táo bạo, bất ngờ.", B: "đánh nhanh thắng nhanh.", C: "đánh ăn chắc, tiến ăn chắc.", D: "chinh phục từng gói nhỏ." }, answer: "B" },
-  { id: 10, q: "Sau khi Trung Quốc tuyên bố rút quân (5/3/1979), tình hình biên giới Việt Trung như thế nào?", opts: { A: "Trở lại bình thường.", B: "Đã yên bình trở lại", C: "Tiếp tục căng thẳng.", D: "Liên Xô can thiệp." }, answer: "C" },
-  { id: 11, q: "Sau Đại thắng mùa xuân 1975, Hoàng Sa và Trường Sa do quốc gia nào sau đây quản lý?", opts: { A: "Việt Nam.", B: "Trung Quốc.", C: "Liên Xô.", D: "Triều Tiên." }, answer: "A" },
-  { id: 12, q: "Một trong những hành động thực thi chủ quyền của Chính phủ Việt Nam đối với quần đảo Trường Sa và Hoàng Sa là", opts: { A: "đưa lực lượng ra thực thi chủ quyền.", B: "xây dựng các sân bay quốc tế lớn.", C: "đã xây dựng nhiều căn cứ quân sự.", D: "cho Mỹ thuê lại các bên cảng ở đảo." }, answer: "A" },
-  { id: 13, q: "Tháng 3 năm 1988, Trung Quốc đã sử dụng lực lượng lớn tấn công vào đảo", opts: { A: "Phú Lâm.", B: "Gạc Ma.", C: "Đá Bắc.", D: "Hữu Nhật." }, answer: "B" },
-  { id: 14, q: "Ngay khi Trung Quốc tấn công vào các đảo thuộc quần đảo Trường Sa, Chính phủ Việt Nam đã có một trong những hành động nào sau đây?", opts: { A: "Tổ chức hạm đội để chiếm lại.", B: "Thông báo cho Liên Hợp quốc.", C: "Ra lệnh Tổng động viên cả nước.", D: "Xin viện trợ khẩn cấp từ Liên Xô." }, answer: "B" },
-  { id: 15, q: "Cơ sở pháp lý để Việt Nam bảo vệ chủ quyền biển đảo và phát triển kinh tế biển là", opts: { A: "Luật biển Việt Nam.", B: "Tuyên bố Băng-Cốc.", C: "Hiến chương ASEAN.", D: "Tầm nhìn ASEAN 2025." }, answer: "A" },
-  { id: 16, q: "Chiến thắng biên giới Tây Nam của quân dân Việt Nam có ý nghĩa như thế nào đối với cách mạng Cam-pu-chia?", opts: { A: "Tạo thời cơ thuận lợi cho cách mạng thắng lợi.", B: "Tiêu diệt hoàn toàn chế độ Pôn-pốt - Iêng-xê-ri.", C: "Tăng cường tình đoàn kết các nước Đông Nam Á.", D: "Tạo nên sức mạnh của Việt Nam và Cam-pu-chia." }, answer: "A" },
-  { id: 17, q: "Âm mưu của Khơ-me đỏ khi xâm phạm các vùng lãnh thổ của Việt Nam là", opts: { A: "xâm lược, chống phá Việt Nam.", B: "bắt các ngư dân của Việt Nam.", C: "nhằm gây tiếng vang với quốc tế.", D: "tranh chấp lãnh thổ đang nổ ra." }, answer: "A" },
-  { id: 18, q: "Hành động nào sau đây thể hiện rõ ràng nhất âm mưu bành trướng và chống phá Việt Nam của Trung Quốc năm 1979?", opts: { A: "Can thiệp vào cuộc kháng chiến của Việt Nam.", B: "Hợp tác với Mỹ cấm vận Việt Nam trên mọi mặt.", C: "Dùng 60 vạn quân tấn công toàn tuyến biên giới.", D: "Ký với Anh và Pháp bản thông cáo Thượng Hải." }, answer: "C" },
-  { id: 19, q: "Bản chất hai cuộc chiến tranh biên giới Tây Nam và biên giới phía Bắc của nhân dân Việt Nam là", opts: { A: "cuộc chiến tranh bảo vệ Tổ quốc.", B: "xung đột, tranh chấp biên giới.", C: "để xác lập địa vị số một châu Á.", D: "chiến tranh thống nhất đất nước." }, answer: "A" },
-  { id: 20, q: "Nguyên chủ quan quyết định thắng lợi của hai cuộc chiến tranh bảo vệ biên giới năm 1979 là", opts: { A: "quân đội Trung Quốc còn yếu.", B: "truyền thống dân tộc, yêu nước.", C: "sự ủng hộ giúp đỡ của quốc tế.", D: "đoàn kết ba nước Đông Dương." }, answer: "B" },
-  { id: 21, q: "Nguyên tắc giải quyết các tranh chấp trên Biển Đông của Chính phủ Việt Nam là", opts: { A: "giải quyết bằng biện pháp hòa bình.", B: "sẵn sàng sử dụng vũ lực để tự vệ.", C: "liên minh quân sự với Mỹ, Anh.", D: "xây dựng đặc khu tại Trường Sa." }, answer: "A" },
-  { id: 22, q: "Tổ chức nào sau đây có vai trò đoàn kết toàn dân tộc Việt Nam trong việc bảo vệ chủ quyền đất nước", opts: { A: "Ban Chấp hành Trung ương.", B: "Mặt trận Tổ quốc Việt Nam.", C: "Ban Tuyên giáo Trung ương.", D: "Ban Dân vận Trung ương." }, answer: "B" },
-  { id: 23, q: "Nguyên nhân mang tính truyền thống dẫn đến thắng lợi của cuộc chiến tranh bảo vệ biên giới phía Tây Nam và biên giới phía Bắc là", opts: { A: "quần đội Trung Quốc yếu, lạc hậu.", B: "truyền thống yêu nước của dân tộc.", C: "có sự ủng hộ giúp đỡ của quốc tế.", D: "đoàn kết ba nước Đông Dương từ lâu." }, answer: "B" },
-  { id: 24, q: "Trong cuộc chiến tranh xâm lược biên giới phía Bắc Việt Nam (1979), Trung Quốc đã đạt được mục tiêu nào sau đây?", opts: { A: "Dạy cho Việt Nam một bài học.", B: "Tiêu diệt bộ đội chủ lực Việt Nam.", C: "Phá hủy cơ sở vật chất, đường xá.", D: "Việt Nam đã thay đổi chính sách." }, answer: "C" },
-  { id: 25, q: "Một trong những điều kiện cơ bản để phát huy sức mạnh toàn diện của đất nước nhằm thực hiện nhiệm vụ bảo vệ Tổ quốc là", opts: { A: "độc lập, tự do, dân chủ.", B: "hòa bình và hạnh phúc.", C: "dân quyền và dân sinh.", D: "độc lập và thống nhất." }, answer: "D" },
-  { id: 26, q: "Một trong những điểm giống về nguyên nhân thắng lợi của cuộc chiến tranh bảo vệ biên giới phía Bắc (1979) và cuộc kháng chiến chống Mỹ (1954-1975) là", opts: { A: "đoàn kết của ba nước Đông Dương.", B: "tinh thần yêu nước của nhân dân.", C: "phong trào phản chiến của dân Mỹ.", D: "viện trợ to lớn của Liên Hợp quốc." }, answer: "B" },
-  { id: 27, q: "Bài học được rút ra từ các cuộc kháng chiến bảo vệ Tổ quốc từ năm 1945 đến nay vẫn có giá trị to lớn đối với công cuộc xây dựng đất nước hiện nay là", opts: { A: "tăng cường khối đại đoàn kết toàn dân.", B: "liên minh chặt chẽ với Liên Xô, Trung Quốc.", C: "gia nhập vào các khối liên minh quân sự.", D: "thiết lập quan hệ chiến lược với các nước." }, answer: "A" },
-  { id: 28, q: "Nội dung nào sau đây là đường lối đối ngoại phù hợp mà Việt Nam nên thực hiện đối với Trung Quốc hiện nay?", opts: { A: "Khép lại quá khứ, hợp tác kinh tế nhưng cảnh giác đề phòng.", B: "Tuyên truyền cổ động chống lại Trung Quốc trên mọi mặt.", C: "Chuẩn bị sức mạnh quân sự để tấn công quân Trung Quốc.", D: "Hợp tác với Nhật, Mỹ, Nga để cô lập toàn diện Trung Quốc." }, answer: "A" },
-  { id: 29, q: "Trong cuộc chiến tranh bảo vệ biên giới phía Bắc (1979), điểm chung của Tướng Sùng Lãm, Hoàng Đan là", opts: { A: "nỗi khiếp sợ của quân Trung Quốc.", B: "đều xuất thân từ vùng đất Nghệ An.", C: "từng là chỉ huy trưởng Quân đoàn 2.", D: "đều là Anh hùng Lực lượng vũ trang." }, answer: "A" },
-  { id: 30, q: "Một trong những nguyên nhân thất bại của quân Trung Quốc năm 1979 là", opts: { A: "số quân Trung Quốc tham chiến còn ít.", B: "tinh thần chiến đấu của quân và dân ta.", C: "đe dọa tấn công hạt nhân của Liên Xô.", D: "sức mạnh các quân đoàn chủ lực của ta." }, answer: "B" }
+  // --- QUESTIONS DATA ---
+    const questionsData = [
+  {
+    id: 1,
+    q: "Một quốc gia châu Á đã dựng tượng đài Hồ Chí Minh là",
+    opts: {
+      A: "Ấn Độ.",
+      B: "Nê-pan.",
+      C: "Bru-nây.",
+      D: "Miến Điện."
+    },
+    answer: "A"
+  },
+  {
+    id: 2,
+    q: "Một quốc gia châu Âu đã dựng tượng đài Hồ Chí Minh là",
+    opts: {
+      A: "Ấn Độ.",
+      B: "Cuba.",
+      C: "Nga.",
+      D: "Mỹ."
+    },
+    answer: "C"
+  },
+  {
+    id: 3,
+    q: "Một quốc gia châu Mỹ đã dựng tượng đài Hồ Chí Minh là",
+    opts: {
+      A: "Canada.",
+      B: "Cuba.",
+      C: "Ecuador.",
+      D: "Pê-ru."
+    },
+    answer: "B"
+  },
+  {
+    id: 4,
+    q: "Quốc gia có nhiều di tích gắn với hoạt động của Hồ Chí Minh (1911-1941) là",
+    opts: {
+      A: "Hàn Quốc.",
+      B: "Canada.",
+      C: "Pháp.",
+      D: "Cu-ba."
+    },
+    answer: "C"
+  },
+  {
+    id: 5,
+    q: "Quốc gia không ghi dấu ấn của Hồ Chí Minh giai đoạn 1911-1920 là",
+    opts: {
+      A: "Mỹ.",
+      B: "Anh.",
+      C: "Nga.",
+      D: "Pháp."
+    },
+    answer: "C"
+  },
+  {
+    id: 6,
+    q: "Năm 1976, thành phố được đổi tên là TP. Hồ Chí Minh là",
+    opts: {
+      A: "Sài Gòn - Gia Định.",
+      B: "Hà - Nam - Ninh.",
+      C: "Quảng Đà.",
+      D: "Hậu Giang."
+    },
+    answer: "A"
+  },
+  {
+    id: 7,
+    q: "“Ham muốn tột bậc” của Hồ Chí Minh là",
+    opts: {
+      A: "Việt Nam thành cường quốc.",
+      B: "vô sản đoàn kết.",
+      C: "độc lập, tự do cho dân tộc.",
+      D: "không còn chiến tranh."
+    },
+    answer: "C"
+  },
+  {
+    id: 8,
+    q: "Dân tộc lấy họ Hồ làm họ chung là",
+    opts: {
+      A: "Vân Kiều.",
+      B: "Xơ Đăng.",
+      C: "Khơ-me.",
+      D: "Ba Na."
+    },
+    answer: "A"
+  },
+  {
+    id: 9,
+    q: "Nguyện vọng nhân dân miền Nam sau khi thống nhất là",
+    opts: {
+      A: "miễn thuế.",
+      B: "đón Bác vào thăm.",
+      C: "ra thăm lăng.",
+      D: "giàu có."
+    },
+    answer: "B"
+  },
+  {
+    id: 10,
+    q: "Sau khi Bác mất, nhân dân miền Nam đã",
+    opts: {
+      A: "chống Diệm.",
+      B: "ra Bắc dâng hương.",
+      C: "xây khu tưởng niệm.",
+      D: "đồng loạt đưa tang."
+    },
+    answer: "D"
+  },
+  {
+    id: 11,
+    q: "Di sản thiêng liêng của Hồ Chí Minh là",
+    opts: {
+      A: "Di chúc.",
+      B: "Lời kêu gọi.",
+      C: "Lăng Bác.",
+      D: "Quảng trường."
+    },
+    answer: "A"
+  },
+  {
+    id: 12,
+    q: "Loài cây miền Nam kính dâng Bác là",
+    opts: {
+      A: "Nhãn.",
+      B: "Cam.",
+      C: "Vải.",
+      D: "Vú sữa."
+    },
+    answer: "D"
+  },
+  {
+    id: 13,
+    q: "“… trong trái tim tôi” là",
+    opts: {
+      A: "miền Nam.",
+      B: "miền Trung.",
+      C: "nước Nga.",
+      D: "các đồng chí."
+    },
+    answer: "A"
+  },
+  {
+    id: 14,
+    q: "Tác phẩm viết về Hồ Chí Minh là",
+    opts: {
+      A: "Rừng xà nu.",
+      B: "Búp sen xanh.",
+      C: "Nhật ký trong tù.",
+      D: "Thuyền và Biển."
+    },
+    answer: "B"
+  },
+  {
+    id: 15,
+    q: "Năm 1987, tổ chức công nhận Hồ Chí Minh là danh nhân văn hóa là",
+    opts: {
+      A: "UNESCO.",
+      B: "UNICEF.",
+      C: "ASEAN.",
+      D: "NAFTA."
+    },
+    answer: "A"
+  },
+  {
+    id: 16,
+    q: "Nguyễn Ái Quốc được giúp đỡ vì",
+    opts: {
+      A: "nhân cách cao đẹp.",
+      B: "Quốc tế CS can thiệp.",
+      C: "Liên Xô đề nghị.",
+      D: "nguyện vọng nhân dân."
+    },
+    answer: "A"
+  },
+  {
+    id: 17,
+    q: "Học tập đạo đức Hồ Chí Minh để",
+    opts: {
+      A: "thăng tiến.",
+      B: "tăng thu nhập.",
+      C: "hoàn thiện bản thân.",
+      D: "vào Đảng."
+    },
+    answer: "C"
+  },
+  {
+    id: 18,
+    q: "Xây lăng Hồ Chí Minh vì",
+    opts: {
+      A: "nguyện vọng nhân dân.",
+      B: "trí thức thế giới.",
+      C: "Trung Quốc, Liên Xô.",
+      D: "UNESCO."
+    },
+    answer: "A"
+  },
+  {
+    id: 19,
+    q: "Trí thức theo cách mạng vì",
+    opts: {
+      A: "lợi ích cá nhân.",
+      B: "Tổ quốc là trên hết.",
+      C: "bị theo dõi.",
+      D: "khó khăn việc làm."
+    },
+    answer: "B"
+  },
+  {
+    id: 20,
+    q: "Mục đích học tập theo Bác là",
+    opts: {
+      A: "đoàn kết quốc tế.",
+      B: "gắn kết XHCN.",
+      C: "củng cố Đảng.",
+      D: "phát huy giá trị tư tưởng."
+    },
+    answer: "D"
+  },
+  {
+    id: 21,
+    q: "Cuộc vận động có tác dụng",
+    opts: {
+      A: "lan tỏa giá trị tích cực.",
+      B: "giảm thất nghiệp.",
+      C: "đổi cơ cấu dân cư.",
+      D: "ổn định vùng cao."
+    },
+    answer: "A"
+  },
+  {
+    id: 23,
+    q: "Thuận lợi xây lăng là",
+    opts: {
+      A: "đất nước giải phóng.",
+      B: "nhân dân ủng hộ.",
+      C: "đủ vật liệu.",
+      D: "ASEAN giúp."
+    },
+    answer: "B"
+  },
+  {
+    id: 24,
+    q: "Phong cách qua thơ là",
+    opts: {
+      A: "thật thà.",
+      B: "nhân nghĩa.",
+      C: "giản dị.",
+      D: "mạnh mẽ."
+    },
+    answer: "C"
+  },
+  {
+    id: 25,
+    q: "Biểu tượng khát vọng thống nhất là",
+    opts: {
+      A: "đường Hồ Chí Minh trên biển.",
+      B: "đường sắt cao tốc.",
+      C: "đường sắt trên cao.",
+      D: "đường ven biển."
+    },
+    answer: "A"
+  },
+  {
+    id: 26,
+    q: "Thay đổi tên để",
+    opts: {
+      A: "tránh truy lùng.",
+      B: "làm hồ sơ.",
+      C: "Quốc tế yêu cầu.",
+      D: "thu hút dân."
+    },
+    answer: "A"
+  },
+  {
+    id: 27,
+    q: "Nhận định về tư tưởng Hồ Chí Minh",
+    opts: {
+      A: "Sai.",
+      B: "Đúng vì nền tảng lý luận.",
+      C: "Đúng vì tài sản vô giá.",
+      D: "Sai vì chỉ Mác-Lênin."
+    },
+    answer: "B"
+  },
+  {
+    id: 28,
+    q: "Vai trò Hồ Chí Minh quốc tế là",
+    opts: {
+      A: "chiến sĩ lỗi lạc.",
+      B: "lãnh đạo Quốc tế CS.",
+      C: "hoạch định đường lối.",
+      D: "biểu tượng hòa bình."
+    },
+    answer: "A"
+  },
+  {
+    id: 29,
+    q: "Nhận định về Gandhi là",
+    opts: {
+      A: "Đúng.",
+      B: "Sai.",
+      C: "Đúng vì không theo QTCS.",
+      D: "Sai vì không quốc tế."
+    },
+    answer: "A"
+  },
+  {
+    id: 30,
+    q: "Điểm chung Nguyễn Sơn, Nguyễn Bình, Trần Đại Nghĩa là",
+    opts: {
+      A: "cống hiến cả đời.",
+      B: "đều là Đại tướng.",
+      C: "lãnh đạo cao cấp.",
+      D: "từ yêu nước thành cộng sản."
+    },
+    answer: "A"
+  }
 ];
-
-
-   
 
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
